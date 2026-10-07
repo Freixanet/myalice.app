@@ -3,74 +3,74 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alice — Your AI operator</title>
-<meta name="description" content="Alice is an AI-native iPhone assistant that finishes real-world jobs for you: errands, purchases, briefings, and a personal editorial feed.">
+<title>Alice — your own Hermes agent, on your iPhone</title>
+<meta name="description" content="A native iPhone app for your own Hermes agent: talk to it, watch it work and let it run errands for you. Hermes and your model keys stay on your own Mac or server.">
+<link rel="canonical" href="https://myalice.app/">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
 <style>
-  :root { --bg: #0b0c10; --fg: #f2f3f5; --muted: #a7adba; --accent: #d97757; }
+  :root {
+    --bg: #F5F2EB; --fg: #20271F; --muted: #4F5A4A; --rule: #D9D4C7; --accent: #566C48;
+    --serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #171B16; --fg: #EEEAE0; --muted: #B3B9AA; --rule: #343B32; --accent: #B8C8A6; }
+  }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--fg);
-         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif;
-         line-height: 1.6; }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
-  header { font-size: 14px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
-  h1 { font-size: clamp(38px, 7vw, 60px); line-height: 1.08; margin: 18px 0 12px; letter-spacing: -0.02em; }
-  h1 .accent { color: var(--accent); }
-  p.lead { font-size: 19px; color: var(--muted); max-width: 34em; }
-  .grid { display: grid; gap: 18px; margin: 48px 0; }
-  @media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
-  .card { border: 1px solid #23252d; border-radius: 14px; padding: 22px; background: #101218; }
-  .card h3 { margin: 0 0 8px; font-size: 17px; }
-  .card p { margin: 0; color: var(--muted); font-size: 15px; }
-  .how { border-top: 1px solid #23252d; padding-top: 32px; margin-top: 8px; }
-  .how h2 { font-size: 22px; margin-bottom: 8px; }
-  .how p, li { color: var(--muted); }
-  ul { padding-left: 20px; }
-  footer { margin-top: 56px; border-top: 1px solid #23252d; padding-top: 24px;
-           color: var(--muted); font-size: 14px; display: flex;
-           justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  a { color: var(--fg); }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--sans); }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 64px 24px 48px; }
+  .mark { font: 28px/1 var(--serif); margin: 0; }
+  h1 { font: 400 clamp(40px, 9vw, 64px)/1.05 var(--serif); letter-spacing: -0.01em; margin: 48px 0 20px; }
+  .lead { font-size: 19px; color: var(--muted); margin: 0 0 32px; }
+  h2 { font: 400 26px/1.2 var(--serif); margin: 48px 0 12px; }
+  p, li { color: var(--muted); }
+  strong { color: var(--fg); font-weight: 600; }
+  ul { padding-left: 20px; margin: 0; }
+  li + li { margin-top: 8px; }
+  .status { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 16px 0; margin: 0; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 32px; }
+  a { color: var(--fg); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  code { font: 15px var(--mono); }
+  footer { margin-top: 64px; border-top: 1px solid var(--rule); padding-top: 20px; font-size: 14px; color: var(--muted); }
+  footer p { margin: 4px 0; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>Alice</header>
-  <h1>An AI assistant that <span class="accent">finishes the job</span>.</h1>
-  <p class="lead">Alice is an AI-native iPhone assistant with its own agent system. You ask once — it does the research, runs the errand, verifies the result, and reports back.</p>
+<main class="wrap">
+  <p class="mark">Alice</p>
 
-  <div class="grid">
-    <div class="card">
-      <h3>Real-world errands</h3>
-      <p>From finding the right product to completing a purchase end-to-end, with hardened price verification before anything is paid.</p>
-    </div>
-    <div class="card">
-      <h3>Proactive briefings</h3>
-      <p>A morning briefing with your agenda, mail that needs action, deadlines, and your sleep — without opening five apps.</p>
-    </div>
-    <div class="card">
-      <h3>Editorial feed</h3>
-      <p>A personal daily edition generated for you, replacing the generic RSS reader.</p>
-    </div>
-    <div class="card">
-      <h3>Guardrails, not vibes</h3>
-      <p>Deterministic verification layers, secret handling, and CI around the AI — so "done" means done.</p>
-    </div>
-  </div>
+  <h1>Your own agent. On your iPhone.</h1>
+  <p class="lead">A native iPhone app for your own <a href="https://hermes-agent.nousresearch.com">Hermes agent</a>: talk to it, watch it work and let it run errands for you. Hermes and your model keys stay on your own Mac or server.</p>
 
-  <div class="how">
-    <h2>How it's built</h2>
-    <p>Alice runs a multi-agent system ("Hermes") on the user's own machine:</p>
-    <ul>
-      <li>Native iPhone app with chat, voice, and widgets</li>
-      <li>Agent engine with tool use, verification, and approvals</li>
-      <li>Continuous integration: hundreds of tests per change</li>
-    </ul>
-    <p>Contact: <a href="mailto:hello@myalice.app">hello@myalice.app</a></p>
-  </div>
+  <p class="status"><strong>Status:</strong> a personal project in active daily use and development. It is not on the App Store; you build it with Xcode. It needs iOS 26 and a Hermes you run yourself.</p>
+
+  <h2>Why it exists</h2>
+  <ul>
+    <li>You see the page the agent is on, live, and can take over.</li>
+    <li>Logins, cards, keys and verification codes are typed into secure sheets and go to Hermes' vault on your Mac, never into the chat.</li>
+    <li>An irreversible step, such as paying, waits for one explicit “Pay” from you.</li>
+  </ul>
+
+  <h2>You need</h2>
+  <ul>
+    <li>A Mac or server running <strong>Hermes 0.21.x</strong>, with a model provider configured.</li>
+    <li>A Mac with <strong>Xcode 26</strong>, XcodeGen and an Apple developer account.</li>
+    <li>An <strong>iPhone with iOS 26</strong> that can reach Hermes, on the same network or through Tailscale.</li>
+  </ul>
+
+  <nav class="links" aria-label="Project links">
+    <a href="https://github.com/Freixanet/alice">Source and setup on GitHub</a>
+    <a href="https://github.com/Freixanet/alice#limitations">Limitations</a>
+    <a href="https://github.com/Freixanet/alice/blob/main/docs/getting-connected.md" hreflang="es">Guía en español</a>
+  </nav>
 
   <footer>
-    <span>© 2026 Alice</span>
-    <span>Built with AI, directed by a human.</span>
+    <p>An independent project, not a Nous Research product.</p>
+    <p><a href="https://github.com/Freixanet/alice/blob/main/LICENSE">MIT</a> © Marc Freixanet</p>
   </footer>
-</div>
+</main>
 </body>
 </html>
