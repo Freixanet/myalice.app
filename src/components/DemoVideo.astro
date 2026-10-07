@@ -1,0 +1,142 @@
+---
+// Demo video under the hero. Click-to-load facade: until the visitor presses play,
+// the page ships no YouTube request, only a link styled as a poster. Without
+// JavaScript the link opens the video on YouTube. Not rendered until DEMO_VIDEO_ID is set.
+import { copy, type Locale } from '../i18n';
+import { DEMO_VIDEO_ID, DEMO_VIDEO_POSTER, isFilled } from '../site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const v = copy[locale].video;
+const enabled = isFilled(DEMO_VIDEO_ID);
+const watchUrl = `https://www.youtube.com/watch?v=${DEMO_VIDEO_ID}`;
+---
+
+{enabled && (
+  <section class="video" aria-labelledby="video-title">
+    <div class="container video__inner">
+      <h2 id="video-title" class="h3">{v.title}</h2>
+      <div class="video__frame" data-video-id={DEMO_VIDEO_ID} data-video-title={v.iframeTitle}>
+        <a class="video__poster" href={watchUrl} data-video-play>
+          {isFilled(DEMO_VIDEO_POSTER) && (
+            <img class="video__image" src={DEMO_VIDEO_POSTER} alt="" loading="lazy" decoding="async" />
+          )}
+          <span class="video__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M8 5v14l11-7Z" fill="currentColor" /></svg>
+          </span>
+          <span class="video__label">{v.play}</span>
+        </a>
+      </div>
+      <p class="small video__note">{v.note}</p>
+    </div>
+  </section>
+)}
+
+{enabled && (
+  <script is:inline>
+    (() => {
+      const frame = document.querySelector('[data-video-id]');
+      const play = frame && frame.querySelector('[data-video-play]');
+      if (!play) return;
+      play.addEventListener('click', (event) => {
+        event.preventDefault();
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${frame.dataset.videoId}?autoplay=1&rel=0`;
+        iframe.title = frame.dataset.videoTitle;
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.allowFullscreen = true;
+        iframe.className = 'video__iframe';
+        play.replaceWith(iframe);
+        iframe.focus();
+      });
+    })();
+  </script>
+)}
+
+<style>
+  .video {
+    padding-block: var(--space-0) var(--space-section);
+  }
+
+  .video__inner {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .video__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-panel-dark-bg);
+  }
+
+  .video__poster {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-4);
+    color: var(--color-panel-dark-text);
+    text-decoration: none;
+  }
+
+  .video__poster:focus-visible {
+    outline-color: var(--color-panel-dark-text);
+    outline-offset: calc(var(--focus-offset) * -1 - var(--border-width-focus));
+  }
+
+  .video__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video__play {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: var(--space-16);
+    height: var(--space-16);
+    border: var(--border-width) solid var(--color-panel-dark-muted);
+    border-radius: var(--radius-full);
+    background: var(--color-panel-dark-bg);
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .video__play svg {
+    width: var(--space-8);
+    height: var(--space-8);
+  }
+
+  .video__poster:active .video__play {
+    transform: scale(var(--motion-press-scale));
+  }
+
+  .video__label {
+    position: relative;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius);
+    background: var(--color-panel-dark-bg);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+  }
+
+  .video__frame :global(.video__iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .video__note {
+    color: var(--color-text-subtle);
+  }
+</style>
