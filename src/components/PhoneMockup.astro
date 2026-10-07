@@ -1,7 +1,6 @@
 ---
 // Conceptual iPhone built in HTML/CSS. Decorative: hidden from assistive tech,
 // described by a visually hidden paragraph. Messages enter one by one (CSS only).
-import AliceMark from './AliceMark.astro';
 import { copy, type Locale } from '../i18n';
 
 interface Props {
@@ -17,7 +16,6 @@ const caption = copy[locale].hero.caption;
     <div class="device__screen">
       <span class="device__island"></span>
       <div class="device__header">
-        <AliceMark class="device__mark" />
         <span class="device__name">Alice</span>
       </div>
       <ol class="device__thread">
@@ -113,11 +111,6 @@ const caption = copy[locale].hero.caption;
     gap: var(--space-1);
     margin-bottom: var(--device-gap);
     color: var(--color-text);
-  }
-
-  .device__header :global(.device__mark) {
-    width: var(--device-mark);
-    height: var(--device-mark);
   }
 
   .device__name {

@@ -1,5 +1,4 @@
 ---
-import AliceMark from './AliceMark.astro';
 import { copy, paths, type Locale } from '../i18n';
 import { GITHUB_URL } from '../site';
 
@@ -13,7 +12,6 @@ const t = copy[locale].nav;
 <header class="nav">
   <div class="container nav__inner">
     <a class="nav__brand" href={paths[locale]} aria-label={t.homeLabel}>
-      <AliceMark class="nav__mark" />
       <span class="nav__wordmark" aria-hidden="true">Alice</span>
     </a>
 
@@ -57,11 +55,6 @@ const t = copy[locale].nav;
     min-height: var(--size-touch);
     color: var(--color-text);
     text-decoration: none;
-  }
-
-  .nav__brand :global(.nav__mark) {
-    width: var(--size-icon);
-    height: var(--size-icon);
   }
 
   .nav__wordmark {

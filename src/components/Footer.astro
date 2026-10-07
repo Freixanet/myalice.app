@@ -1,5 +1,4 @@
 ---
-import AliceMark from './AliceMark.astro';
 import { copy, paths, type Locale } from '../i18n';
 
 interface Props {
@@ -13,7 +12,6 @@ const f = copy[locale].footer;
   <div class="container footer__inner">
     <div class="footer__brand">
       <a class="footer__home" href={paths[locale]} aria-label={copy[locale].nav.homeLabel}>
-        <AliceMark class="footer__mark" />
         <span class="footer__wordmark" aria-hidden="true">Alice</span>
       </a>
       <p class="small">{f.independent}</p>
@@ -54,11 +52,6 @@ const f = copy[locale].footer;
     margin-bottom: var(--space-2);
     color: var(--color-text);
     text-decoration: none;
-  }
-
-  .footer__home :global(.footer__mark) {
-    width: var(--size-icon);
-    height: var(--size-icon);
   }
 
   .footer__wordmark {
