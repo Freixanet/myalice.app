@@ -1,3 +1,4 @@
+# Deploys on every push to main (and manually via workflow_dispatch).
 # Copy to .github/workflows/deploy.yml at the repository root.
 # Source: Astro docs, "Deploy your Astro Site to GitHub Pages" (Context7, /withastro/docs, 2026-10-07).
 name: Deploy to GitHub Pages
