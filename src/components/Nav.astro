@@ -1,0 +1,117 @@
+---
+import AliceMark from './AliceMark.astro';
+import { copy, paths, type Locale } from '../i18n';
+import { GITHUB_URL } from '../site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = copy[locale].nav;
+---
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="nav__brand" href={paths[locale]} aria-label={t.homeLabel}>
+      <AliceMark class="nav__mark" />
+      <span class="nav__wordmark" aria-hidden="true">Alice</span>
+    </a>
+
+    <nav class="nav__sections" aria-label={t.ariaLabel}>
+      <ul class="nav__links">
+        {t.links.map((link) => (
+          <li><a class="nav__link" href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="nav__actions">
+      <a
+        class="nav__link nav__lang"
+        href={t.langSwitch.href}
+        hreflang={t.langSwitch.hreflang}
+        lang={t.langSwitch.hreflang}
+        aria-label={t.langSwitch.ariaLabel}
+      >{t.langSwitch.label}</a>
+      <a class="btn btn--secondary btn--small" href={GITHUB_URL}>{t.github}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    min-height: var(--size-nav);
+  }
+
+  .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--size-touch);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .nav__brand :global(.nav__mark) {
+    width: var(--size-icon);
+    height: var(--size-icon);
+  }
+
+  .nav__wordmark {
+    font-family: var(--font-serif);
+    font-size: var(--text-wordmark);
+    line-height: var(--leading-tight);
+  }
+
+  .nav__sections {
+    display: none;
+  }
+
+  .nav__links {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-touch);
+    color: var(--color-text-muted);
+    font-size: var(--text-small);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .nav__link:hover {
+    color: var(--color-text);
+  }
+
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-inline-start: auto;
+  }
+
+  .nav__lang {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    min-width: var(--size-touch);
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .nav__sections {
+      display: block;
+      margin-inline-start: var(--space-6);
+    }
+  }
+</style>
