@@ -1,0 +1,40 @@
+{
+  "name": "reference-hero",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "qa": "node scripts/qa.mjs",
+    "qa:shots": "node scripts/qa.mjs --shots",
+    "qa:hardcoded": "bash scripts/check-hardcoded.sh",
+    "qa:budget": "node scripts/check-budget.mjs",
+    "qa:contrast": "node scripts/contrast.mjs",
+    "og": "node scripts/render-og.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.7"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@astrojs/sitemap": "3.7.4",
+    "@axe-core/playwright": "4.13.0",
+    "@capsizecss/core": "4.1.3",
+    "@capsizecss/metrics": "4.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/ibm-plex-sans": "5.3.0",
+    "@fontsource/instrument-serif": "5.3.0",
+    "lighthouse": "13.5.0",
+    "playwright": "1.64.0",
+    "typescript": "6.0.3"
+  }
+}
