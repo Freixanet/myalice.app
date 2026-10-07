@@ -1,0 +1,98 @@
+---
+import PhoneMockup from './PhoneMockup.astro';
+import { copy, type Locale } from '../i18n';
+import { GITHUB_URL } from '../site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const h = copy[locale].hero;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="label">{h.eyebrow}</p>
+      <h1 id="hero-title" class="display hero__title">
+        <span class="hero__line">{h.titleLine1}</span>
+        <span class="hero__line">{h.titleLine2}</span>
+      </h1>
+      <p class="lead">{h.lead}</p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary" href="#build">{h.primaryCta}</a>
+        <a class="btn btn--secondary" href={GITHUB_URL}>{h.secondaryCta}</a>
+      </div>
+      <ul class="hero__meta">
+        {h.meta.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+    <div class="hero__visual">
+      <PhoneMockup locale={locale} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--space-16) var(--space-section);
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: var(--space-stack-lg);
+  }
+
+  .hero__copy > * + * {
+    margin-top: var(--space-6);
+  }
+
+  .hero__line {
+    display: block;
+  }
+
+  .hero__copy > .hero__ctas {
+    margin-top: var(--space-8);
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .hero__copy > .hero__meta {
+    margin-top: var(--space-5);
+  }
+
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    font-size: var(--text-small);
+    line-height: var(--leading-small);
+    color: var(--color-text-subtle);
+  }
+
+  .hero__meta li + li::before {
+    content: "·";
+    margin-inline-end: var(--space-2);
+  }
+
+  .hero__visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      align-items: center;
+      gap: var(--space-12);
+    }
+
+    .hero__visual {
+      justify-content: flex-end;
+    }
+  }
+</style>

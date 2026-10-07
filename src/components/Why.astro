@@ -1,0 +1,306 @@
+---
+// Section 3 — Where a messaging bot falls short. Four differentiators; each shows
+// a small UI specimen (never an icon tile). Specimens are decorative (aria-hidden):
+// the text beside them carries the meaning.
+import { copy, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const y = copy[locale].why;
+const s = y.specimens;
+---
+
+<section class="section" id="why" aria-labelledby="why-title">
+  <div class="container">
+    <header class="section-header" data-reveal>
+      <h2 id="why-title" class="h2">{y.title}</h2>
+      <p class="lead">{y.intro}</p>
+    </header>
+
+    <ol class="why-list">
+      {y.items.map((item, i) => (
+        <li class="why-item" data-reveal>
+          <div class="why-item__text">
+            <p class="label">{item.number}</p>
+            <h3 class="h3">{item.title}</h3>
+            <p class="body">{item.body}</p>
+          </div>
+          <div class="stage" aria-hidden="true">
+            {i === 0 && (
+              <div class="spec spec--browser">
+                <div class="spec-browser__bar">
+                  <span class="dot"></span>
+                  <span class="spec-browser__title">{s.browserTitle}</span>
+                  <span class="spec-browser__live">{s.browserLive}</span>
+                </div>
+                <div class="spec-browser__page">
+                  <span class="skeleton skeleton--1"></span>
+                  <span class="skeleton skeleton--2"></span>
+                  <span class="skeleton skeleton--3"></span>
+                </div>
+                <span class="spec-btn spec-btn--secondary">{s.browserAction}</span>
+              </div>
+            )}
+            {i === 1 && (
+              <div class="spec spec--sheet">
+                <p class="spec-sheet__title">{s.sheetTitle}</p>
+                <p class="spec-sheet__label">{s.sheetField}</p>
+                <p class="spec-sheet__field">{s.sheetValue}</p>
+                <span class="spec-btn spec-btn--primary">{s.sheetSave}</span>
+                <p class="spec-sheet__result">
+                  <svg class="check" viewBox="0 0 12 12" focusable="false">
+                    <path d="M2.5 6.25 5 8.5l4.5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  {s.sheetResult}
+                </p>
+              </div>
+            )}
+            {i === 2 && (
+              <div class="spec spec--pay">
+                <p class="spec-pay__text">{s.payText}</p>
+                <p class="spec-pay__total"><span>{s.payTotalLabel}</span><span class="spec-pay__amount">{s.payTotalValue}</span></p>
+                <div class="spec-pay__actions">
+                  <span class="spec-btn spec-btn--secondary">{s.payCancel}</span>
+                  <span class="spec-btn spec-btn--primary">{s.payButton}</span>
+                </div>
+              </div>
+            )}
+            {i === 3 && (
+              <div class="spec spec--keys">
+                <div class="spec-keys__node">
+                  <span class="spec-keys__name">{s.keysPhone}</span>
+                  <span class="spec-keys__detail">{s.keysPhoneDetail}</span>
+                </div>
+                <span class="spec-keys__link"></span>
+                <div class="spec-keys__node spec-keys__node--home">
+                  <span class="spec-keys__name">{s.keysMac}</span>
+                  <span class="spec-keys__detail">{s.keysMacDetail}</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .why-item {
+    display: grid;
+    gap: var(--space-8);
+    padding-block: var(--space-10);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .why-item__text {
+    display: grid;
+    align-content: center;
+    gap: var(--space-4);
+  }
+
+  .stage {
+    display: grid;
+    place-items: center;
+    min-height: var(--specimen-min-height);
+    padding: var(--space-6);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .spec {
+    display: grid;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: var(--specimen-max);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    font-size: var(--text-small);
+    line-height: var(--leading-small);
+  }
+
+  .dot {
+    width: var(--size-dot);
+    height: var(--size-dot);
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+  }
+
+  .spec-browser__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+  }
+
+  .spec-browser__title {
+    color: var(--color-text-muted);
+  }
+
+  .spec-browser__live {
+    margin-inline-start: auto;
+    color: var(--color-accent);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  .spec-browser__page {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border-radius: var(--radius-xs);
+    background: var(--color-surface-sunken);
+  }
+
+  .skeleton {
+    display: block;
+    height: var(--device-skeleton);
+    border-radius: var(--radius-full);
+    background: var(--color-border);
+  }
+
+  .skeleton--1 { width: 100%; }
+  .skeleton--2 { width: 80%; }
+  .skeleton--3 { width: 60%; }
+
+  .spec-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--size-touch);
+    padding-inline: var(--space-4);
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius);
+    font-weight: var(--weight-medium);
+  }
+
+  .spec--browser .spec-btn {
+    justify-self: start;
+  }
+
+  .spec-btn--secondary {
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+  }
+
+  .spec-btn--primary {
+    background: var(--color-button-primary-bg);
+    color: var(--color-button-primary-text);
+  }
+
+  .spec-sheet__title {
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+  }
+
+  .spec-sheet__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .spec-sheet__field {
+    padding: var(--space-3);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    font-family: var(--font-mono);
+    color: var(--color-text);
+  }
+
+  .spec-sheet__result {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+  }
+
+  .check {
+    flex: none;
+    width: var(--device-icon);
+    height: var(--device-icon);
+    color: var(--color-accent);
+  }
+
+  .spec--pay {
+    border-color: var(--color-accent);
+    background: var(--color-surface);
+  }
+
+  .spec-pay__text {
+    color: var(--color-text);
+  }
+
+  .spec-pay__total {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-text-muted);
+  }
+
+  .spec-pay__amount {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+  }
+
+  .spec-pay__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+
+  .spec--keys {
+    justify-items: stretch;
+    gap: var(--space-0);
+    padding: var(--space-0);
+    border: none;
+    background: transparent;
+  }
+
+  .spec-keys__node {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+  }
+
+  .spec-keys__node--home {
+    border-color: var(--color-accent);
+  }
+
+  .spec-keys__name {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .spec-keys__detail {
+    color: var(--color-text);
+  }
+
+  .spec-keys__link {
+    justify-self: center;
+    width: var(--border-width);
+    height: var(--connector-length);
+    background: var(--color-border-strong);
+  }
+
+  @media (min-width: 768px) {
+    .why-item {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      gap: var(--space-12);
+    }
+  }
+</style>

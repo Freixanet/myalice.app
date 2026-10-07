@@ -1,0 +1,83 @@
+<!doctype html>
+<!--
+  Open Graph image for myalice.app, 1200×630.
+  Render: open og.html?lang=en and og.html?lang=es at a 1200×630 viewport, scale 1,
+  screenshot the viewport, save as public/og/og-en.png and public/og/og-es.png.
+  Fonts load from ../../reference-hero/public/fonts/ (same woff2 files as the site).
+  This file is outside src/, so literal colors here are intended (they equal tokens.css light values).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alice OG</title>
+<style>
+  @font-face { font-family: "Instrument Serif"; src: url("../../reference-hero/public/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "IBM Plex Sans"; src: url("../../reference-hero/public/fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "IBM Plex Sans"; src: url("../../reference-hero/public/fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+  @font-face { font-family: "IBM Plex Mono"; src: url("../../reference-hero/public/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #F5F2EB; color: #20271F; font-family: "IBM Plex Sans", Arial, sans-serif; position: relative; }
+  .brand { position: absolute; left: 80px; top: 64px; display: flex; align-items: center; gap: 12px; }
+  .brand svg { width: 36px; height: 36px; }
+  .brand span { font-family: "Instrument Serif", serif; font-size: 44px; line-height: 1; }
+  h1 { position: absolute; left: 80px; top: 176px; font-family: "Instrument Serif", serif; font-weight: 400; font-size: 104px; line-height: 1; letter-spacing: -0.01em; }
+  h1 span { display: block; }
+  .sub { position: absolute; left: 80px; top: 412px; width: 600px; font-size: 30px; line-height: 1.35; color: #4F5A4A; }
+  .meta { position: absolute; left: 80px; bottom: 56px; font-family: "IBM Plex Mono", monospace; font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: #566C48; }
+  .device { position: absolute; left: 836px; top: 72px; width: 284px; height: 616px; padding: 10px; border-radius: 48px; background: #20271F; }
+  .screen { height: 100%; border-radius: 38px; background: #FBF9F4; padding: 64px 16px 16px; display: flex; flex-direction: column; gap: 12px; position: relative; }
+  .island { position: absolute; top: 12px; left: 50%; width: 88px; height: 26px; margin-left: -44px; border-radius: 999px; background: #20271F; }
+  .bubble { align-self: flex-end; max-width: 85%; padding: 8px 12px; border-radius: 8px; background: #E3E9D9; font-size: 15px; line-height: 1.4; }
+  .card { padding: 14px; border: 1px solid #566C48; border-radius: 8px; background: #FBF9F4; display: grid; gap: 10px; font-size: 15px; line-height: 1.4; }
+  .label { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #566C48; }
+  .total { display: flex; justify-content: space-between; color: #4F5A4A; }
+  .total b { color: #20271F; font-weight: 500; }
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .btn { display: flex; align-items: center; justify-content: center; height: 36px; border-radius: 8px; font-size: 14px; font-weight: 500; }
+  .btn.secondary { border: 1px solid #7F8877; }
+  .btn.primary { background: #20271F; color: #F5F2EB; }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path fill="#20271F" d="M15.1 7.4 7.6 5.1 9.4 10.8Z"/>
+      <path fill="#20271F" d="M16.9 7.4 24.4 5.1 22.6 10.8Z"/>
+      <path fill="none" stroke="#20271F" stroke-width="2.2" stroke-linecap="round" d="M16 11.2c-5.5 1.5-5.5 8.5 0 10"/>
+      <path fill="none" stroke="#20271F" stroke-width="2.2" stroke-linecap="round" d="M16 11.2c5.5 1.5 5.5 8.5 0 10"/>
+      <rect x="15" y="7.2" width="2" height="18.4" rx="1" fill="#20271F"/>
+    </svg>
+    <span>Alice</span>
+  </div>
+  <h1><span data-t="l1">Your own agent.</span><span data-t="l2">On your iPhone.</span></h1>
+  <p class="sub" data-t="sub">A native iPhone app for your own Hermes agent.</p>
+  <p class="meta" data-t="meta">myalice.app · Open source · iOS 26</p>
+  <div class="device">
+    <div class="screen">
+      <span class="island"></span>
+      <p class="bubble" data-t="ask">Order 1 kg of coffee beans from the usual shop.</p>
+      <div class="card">
+        <span class="label" data-t="approval">Approval</span>
+        <p data-t="pay">Alice will pay on this site with your Visa ···4242</p>
+        <p class="total"><span>Total</span><b data-t="amount">€18.90</b></p>
+        <div class="actions"><span class="btn secondary" data-t="cancel">Cancel</span><span class="btn primary" data-t="paybtn">Pay</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const es = {
+      l1: 'Tu propio agente.', l2: 'En tu iPhone.',
+      sub: 'Una app nativa de iPhone para tu propio agente Hermes.',
+      meta: 'myalice.app · Código abierto · iOS 26',
+      ask: 'Pide 1 kg de café en grano en la tienda de siempre.',
+      approval: 'Aprobación', pay: 'Alice pagará en este sitio con tu Visa ···4242',
+      amount: '18,90 €', cancel: 'Cancelar', paybtn: 'Pagar',
+    };
+    if (new URLSearchParams(location.search).get('lang') === 'es') {
+      document.documentElement.lang = 'es';
+      document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = es[el.dataset.t]; });
+    }
+  </script>
+</body>
+</html>

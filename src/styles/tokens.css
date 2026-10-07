@@ -1,0 +1,219 @@
+/* ==========================================================================
+   Alice landing — design tokens (myalice.app)
+   Source of truth for every color, size, space, radius, motion value.
+   Copy this file verbatim to src/styles/tokens.css. Do not edit values.
+   Every other CSS file uses var(--…) only (see 08-QA.md, hardcode check).
+   Contrast ratios for each pair are in 02-DESIGN-TOKENS.md.
+   Breakpoints (cannot be custom properties, used literally in @media):
+     base   0–767px     (designed at 375px)
+     md     min-width: 768px
+     lg     min-width: 1280px
+     xl     min-width: 1600px
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* ---------- Color: light (default) ---------- */
+  --color-bg: #F5F2EB;
+  --color-surface: #FBF9F4;
+  --color-surface-sunken: #ECE8DE;
+  --color-text: #20271F;
+  --color-text-muted: #4F5A4A;
+  --color-text-subtle: #5F6958;
+  --color-accent: #566C48;
+  --color-accent-strong: #435636;
+  --color-accent-soft: #E3E9D9;
+  --color-sand-soft: #EAE4D8;
+  --color-border: #D9D4C7;
+  --color-border-strong: #7F8877;
+  --color-button-primary-bg: #20271F;
+  --color-button-primary-bg-hover: #364132;
+  --color-button-primary-text: #F5F2EB;
+  --color-panel-dark-bg: #20271F;
+  --color-panel-dark-text: #F5F2EB;
+  --color-panel-dark-muted: #BBC9AC;
+  --color-device-frame: #20271F;
+  --color-device-border: #20271F;
+  --color-device-screen: #FBF9F4;
+  --color-focus: #566C48;
+  --color-theme: #F5F2EB; /* <meta name="theme-color"> light */
+
+  /* ---------- Typography: families ---------- */
+  --font-serif: "Instrument Serif", "Instrument Serif Fallback", "Times New Roman", serif;
+  --font-sans: "IBM Plex Sans", "IBM Plex Sans Fallback", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "IBM Plex Mono Fallback", "Courier New", monospace;
+
+  /* ---------- Typography: weights ---------- */
+  --weight-regular: 400;
+  --weight-medium: 500;
+
+  /* ---------- Typography: fluid sizes (375px → 1280px) ---------- */
+  --text-display: clamp(2.75rem, 1.7141rem + 4.4199vw, 5.25rem);  /* 44 → 84px */
+  --text-h2: clamp(2.125rem, 1.5552rem + 2.4309vw, 3.5rem);        /* 34 → 56px */
+  --text-h3: clamp(1.5rem, 1.3446rem + 0.663vw, 1.875rem);         /* 24 → 30px */
+  --text-lead: clamp(1.125rem, 1.0473rem + 0.3315vw, 1.3125rem);   /* 18 → 21px */
+  --text-body: clamp(1rem, 0.9741rem + 0.1105vw, 1.0625rem);       /* 16 → 17px */
+  --text-small: clamp(0.875rem, 0.8491rem + 0.1105vw, 0.9375rem);  /* 14 → 15px */
+  --text-label: clamp(0.75rem, 0.7241rem + 0.1105vw, 0.8125rem);   /* 12 → 13px */
+  --text-code: clamp(0.875rem, 0.8491rem + 0.1105vw, 0.9375rem);   /* 14 → 15px */
+  --text-device: 0.8125rem;        /* 13px, fixed: text inside the iPhone mockup */
+  --text-device-small: 0.6875rem;  /* 11px, fixed: labels inside the iPhone mockup */
+  --text-wordmark: 1.625rem;       /* 26px, fixed: "Alice" in nav and footer */
+
+  /* ---------- Typography: line height ---------- */
+  --leading-display: 1;
+  --leading-h2: 1.05;
+  --leading-h3: 1.15;
+  --leading-lead: 1.5;
+  --leading-body: 1.6;
+  --leading-small: 1.5;
+  --leading-label: 1.4;
+  --leading-code: 1.6;
+  --leading-device: 1.4;
+  --leading-tight: 1;
+
+  /* ---------- Typography: tracking ---------- */
+  --tracking-display: -0.01em;
+  --tracking-h2: -0.005em;
+  --tracking-normal: 0em;
+  --tracking-label: 0.08em;
+
+  /* ---------- Space (4px rhythm) ---------- */
+  --space-0: 0rem;
+  --space-1: 0.25rem;   /*   4px */
+  --space-2: 0.5rem;    /*   8px */
+  --space-3: 0.75rem;   /*  12px */
+  --space-4: 1rem;      /*  16px */
+  --space-5: 1.25rem;   /*  20px */
+  --space-6: 1.5rem;    /*  24px */
+  --space-8: 2rem;      /*  32px */
+  --space-10: 2.5rem;   /*  40px */
+  --space-12: 3rem;     /*  48px */
+  --space-16: 4rem;     /*  64px */
+  --space-20: 5rem;     /*  80px */
+  --space-24: 6rem;     /*  96px */
+  --space-32: 8rem;     /* 128px */
+  --space-section: clamp(5rem, 2.9282rem + 8.8398vw, 10rem);   /* 80 → 160px: block padding of every <section> */
+  --space-gutter: clamp(1rem, 0.3785rem + 2.6519vw, 2.5rem);   /* 16 → 40px: inline padding of .container */
+  --space-stack-lg: clamp(3rem, 2.1713rem + 3.5359vw, 5rem);   /* 48 → 80px: section header → section body */
+
+  /* ---------- Layout sizes ---------- */
+  --container-max: 75rem;     /* 1200px content width */
+  --measure: 38rem;           /* 608px max width for prose paragraphs */
+  --measure-lead: 34rem;      /* 544px max width for lead paragraphs */
+  --measure-heading: 15ch;    /* max width for H2 */
+  --size-touch: 2.75rem;      /* 44px minimum touch target */
+  --size-button: 3rem;        /* 48px button height */
+  --size-nav: 4rem;           /* 64px nav bar height */
+  --size-dot: 0.5rem;         /* 8px status dot */
+  --size-icon: 1.25rem;       /* 20px inline SVG icon */
+  --size-icon-sm: 1rem;       /* 16px FAQ plus icon */
+  --measure-faq: 48rem;       /* 768px max width of the FAQ list */
+  --art-height: 7.5rem;       /* 120px illustration height in workflow panels */
+  --specimen-max: 20rem;      /* 320px max width of a differentiator specimen */
+  --specimen-min-height: 15rem; /* 240px min height of the specimen stage */
+  --connector-length: 2rem;   /* 32px connector between diagram nodes */
+
+  /* ---------- iPhone mockup ---------- */
+  --device-width: clamp(17.5rem, 16.982rem + 2.2099vw, 18.75rem);  /* 280 → 300px */
+  --device-aspect: 9 / 19.5;
+  --device-bezel: 0.625rem;        /* 10px frame thickness */
+  --device-island-width: 5.5rem;   /* 88px */
+  --device-island-height: 1.625rem;/* 26px */
+  --device-island-top: 0.75rem;    /* 12px */
+  --device-screen-pad-top: 3.25rem;/* 52px: clears the island */
+  --device-screen-pad: 0.875rem;   /* 14px */
+  --device-gap: 0.625rem;          /* 10px between messages */
+  --device-mark: 1.5rem;           /* 24px Alice mark in the chat header */
+  --device-icon: 0.75rem;          /* 12px check icon in activity rows */
+  --device-skeleton: 0.375rem;     /* 6px height of a skeleton text line */
+  --device-button: 1.75rem;        /* 28px height of a button inside the mockup */
+  --device-bubble-max: 85%;        /* max width of the user bubble */
+
+  /* ---------- Borders & radii ---------- */
+  --border-width: 1px;
+  --border-width-focus: 2px;
+  --focus-offset: 2px;
+  --radius-xs: 0.25rem;      /*  4px: inline code */
+  --radius: 0.5rem;          /*  8px: buttons, fields, cards, code blocks, panels */
+  --radius-device: 3rem;     /* 48px: iPhone outer frame */
+  --radius-device-screen: 2.375rem; /* 38px = 48 − 10 bezel */
+  --radius-full: 999rem;     /* dots, island only */
+
+  /* ---------- Elevation ---------- */
+  --shadow: none;            /* Intentional: depth comes from 1px borders and surface color, never shadows. */
+
+  /* ---------- Z-index ---------- */
+  --z-base: 0;
+  --z-raised: 1;
+  --z-skip-link: 100;
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;     /* hover/focus color changes */
+  --duration-base: 240ms;     /* FAQ open, button press, copy feedback */
+  --duration-slow: 400ms;     /* scroll reveals, device messages */
+  --motion-distance: 0.75rem;       /* 12px reveal translate */
+  --motion-distance-small: 0.5rem;  /* 8px device message translate */
+  --motion-press-scale: 0.98;       /* :active scale on buttons */
+  --rotate-open: 45deg;             /* FAQ plus icon turns into a cross */
+  --stagger: 80ms;            /* delay step between sibling reveals */
+  --device-delay: 500ms;      /* first device message delay after load */
+  --device-step: 700ms;       /* interval between device messages */
+}
+
+/* ---------- Color: dark ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #171B16;
+    --color-surface: #1F241E;
+    --color-surface-sunken: #121511;
+    --color-text: #EEEAE0;
+    --color-text-muted: #B3B9AA;
+    --color-text-subtle: #9AA191;
+    --color-accent: #B8C8A6;
+    --color-accent-strong: #D0DCC2;
+    --color-accent-soft: #29331F;
+    --color-sand-soft: #2A2721;
+    --color-border: #343B32;
+    --color-border-strong: #737C6B;
+    --color-button-primary-bg: #EEEAE0;
+    --color-button-primary-bg-hover: #D9D4C7;
+    --color-button-primary-text: #171B16;
+    --color-panel-dark-bg: #0F120E;
+    --color-panel-dark-text: #EEEAE0;
+    --color-panel-dark-muted: #B8C8A6;
+    --color-device-frame: #0B0D0A;
+    --color-device-border: #3A4237;
+    --color-device-screen: #1F241E;
+    --color-focus: #B8C8A6;
+    --color-theme: #171B16;
+  }
+}
+
+/* ---------- xl: ≥1600px ---------- */
+@media (min-width: 1600px) {
+  :root {
+    --container-max: 82.5rem;  /* 1320px */
+    --text-display: 6rem;      /* 96px */
+    --text-h2: 4rem;           /* 64px */
+    --device-width: 21.25rem;  /* 340px */
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+    --motion-distance: 0rem;
+    --motion-distance-small: 0rem;
+    --motion-press-scale: 1;
+    --stagger: 0ms;
+    --device-delay: 0ms;
+    --device-step: 0ms;
+  }
+}

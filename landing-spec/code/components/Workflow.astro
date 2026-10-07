@@ -1,0 +1,176 @@
+---
+// Section 2 — From a thought to a task. Three panels; the art is redrawn from
+// docs/media/alice-workflow.svg (Alice repo) in currentColor so it follows the theme.
+import { copy, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const w = copy[locale].workflow;
+const [p1, p2, p3] = w.panels;
+---
+
+<section class="section" id="workflow" aria-labelledby="workflow-title">
+  <div class="container">
+    <header class="section-header" data-reveal>
+      <h2 id="workflow-title" class="h2">{w.title}</h2>
+      <p class="lead">{w.intro}</p>
+    </header>
+
+    <ol class="panels">
+      <li class="panel panel--conversation" data-reveal style="--reveal-index: 0">
+        <p class="panel__label">{p1.label}</p>
+        <svg class="panel__art" viewBox="0 0 320 160" aria-hidden="true" focusable="false">
+          <path class="art-fill-light" d="M70 20h150a16 16 0 0 1 16 16v60a16 16 0 0 1-16 16H118l-30 22v-22H70a16 16 0 0 1-16-16V36a16 16 0 0 1 16-16z" />
+          <path class="art-fill-mid" d="M142 66h116a15 15 0 0 1 15 15v48a15 15 0 0 1-15 15h-12v20l-27-20h-77a15 15 0 0 1-15-15V81a15 15 0 0 1 15-15z" />
+          <path class="art-line" d="M78 46h74M162 92h86M162 110h62" />
+        </svg>
+        <h3 class="h3 panel__title">{p1.title}</h3>
+        <p class="panel__body">{p1.body}</p>
+      </li>
+
+      <li class="panel panel--visibility" data-reveal style="--reveal-index: 1">
+        <p class="panel__label">{p2.label}</p>
+        <svg class="panel__art" viewBox="0 0 320 160" aria-hidden="true" focusable="false">
+          <rect class="art-stroke" x="56" y="16" width="208" height="128" rx="12" />
+          <path class="art-stroke" d="M56 40h208" />
+          <circle class="art-dot" cx="72" cy="28" r="3" />
+          <circle class="art-dot" cx="84" cy="28" r="3" />
+          <rect class="art-stroke" x="76" y="58" width="52" height="64" />
+          <path class="art-stroke" d="M148 66h92M148 86h66M148 106h80" />
+        </svg>
+        <h3 class="h3 panel__title">{p2.title}</h3>
+        <p class="panel__body">{p2.body}</p>
+      </li>
+
+      <li class="panel panel--control" data-reveal style="--reveal-index: 2">
+        <p class="panel__label">{p3.label}</p>
+        <svg class="panel__art" viewBox="0 0 320 160" aria-hidden="true" focusable="false">
+          <circle class="art-ring" cx="160" cy="80" r="64" />
+          <circle class="art-fill-mid" cx="160" cy="80" r="46" />
+          <path class="art-check" d="M140 82l14 14 28-30" />
+        </svg>
+        <h3 class="h3 panel__title">{p3.title}</h3>
+        <p class="panel__body">{p3.body}</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+  .panels {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .panel {
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border-radius: var(--radius);
+  }
+
+  .panel--conversation {
+    background: var(--color-accent-soft);
+    color: var(--color-text);
+  }
+
+  .panel--visibility {
+    background: var(--color-panel-dark-bg);
+    color: var(--color-panel-dark-text);
+  }
+
+  .panel--control {
+    background: var(--color-sand-soft);
+    color: var(--color-text);
+  }
+
+  .panel__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    line-height: var(--leading-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .panel--visibility .panel__label,
+  .panel--visibility .panel__body {
+    color: var(--color-panel-dark-muted);
+  }
+
+  .panel--visibility .panel__title {
+    color: var(--color-panel-dark-text);
+  }
+
+  .panel__art {
+    width: 100%;
+    height: var(--art-height);
+    margin-block: var(--space-4);
+  }
+
+  .panel__body {
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+  }
+
+  /* Illustration paint. Panel 1 and 3 use the accent; panel 2 the dark-panel muted tone. */
+  .art-fill-light {
+    fill: var(--color-surface);
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+
+  .art-fill-mid {
+    fill: var(--color-accent-soft);
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+
+  .panel--control .art-fill-mid {
+    stroke: none;
+    fill: var(--color-accent-soft);
+  }
+
+  .art-line {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .art-stroke {
+    fill: none;
+    stroke: var(--color-panel-dark-muted);
+    stroke-width: 2;
+  }
+
+  .art-dot {
+    fill: var(--color-panel-dark-muted);
+  }
+
+  .art-ring {
+    fill: var(--color-surface);
+    stroke: var(--color-border-strong);
+    stroke-width: 2;
+  }
+
+  .art-check {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (min-width: 768px) {
+    .panels {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

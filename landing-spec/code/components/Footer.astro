@@ -1,0 +1,100 @@
+---
+import AliceMark from './AliceMark.astro';
+import { copy, paths, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const f = copy[locale].footer;
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a class="footer__home" href={paths[locale]} aria-label={copy[locale].nav.homeLabel}>
+        <AliceMark class="footer__mark" />
+        <span class="footer__wordmark" aria-hidden="true">Alice</span>
+      </a>
+      <p class="small">{f.independent}</p>
+      <p class="small">{f.credit}</p>
+      <p class="small"><a class="link" href="https://github.com/Freixanet/alice/blob/main/LICENSE">{f.license}</a> © Marc Freixanet</p>
+    </div>
+    <ul class="footer__links">
+      {f.links.map((l) => (
+        <li><a class="footer__link" href={l.href} hreflang={'hreflang' in l ? l.hreflang : undefined}>{l.label}</a></li>
+      ))}
+      <li><a class="footer__link" href={f.langSwitch.href} hreflang={f.langSwitch.hreflang} lang={f.langSwitch.hreflang}>{f.langSwitch.label}</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: var(--space-12);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .footer__inner {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .footer__brand {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .footer__home {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    justify-self: start;
+    min-height: var(--size-touch);
+    margin-bottom: var(--space-2);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .footer__home :global(.footer__mark) {
+    width: var(--size-icon);
+    height: var(--size-icon);
+  }
+
+  .footer__wordmark {
+    font-family: var(--font-serif);
+    font-size: var(--text-wordmark);
+    line-height: var(--leading-tight);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    gap: var(--space-2) var(--space-6);
+  }
+
+  .footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-touch);
+    color: var(--color-text-muted);
+    font-size: var(--text-small);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .footer__link:hover {
+    color: var(--color-text);
+  }
+
+  @media (min-width: 768px) {
+    .footer__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .footer__links {
+      justify-content: flex-end;
+    }
+  }
+</style>

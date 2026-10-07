@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://myalice.app/sitemap-index.xml

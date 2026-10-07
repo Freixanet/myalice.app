@@ -1,0 +1,317 @@
+---
+// Conceptual iPhone built in HTML/CSS. Decorative: hidden from assistive tech,
+// described by a visually hidden paragraph. Messages enter one by one (CSS only).
+import AliceMark from './AliceMark.astro';
+import { copy, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const d = copy[locale].device;
+const caption = copy[locale].hero.caption;
+---
+
+<figure class="device-figure">
+  <div class="device" aria-hidden="true">
+    <div class="device__screen">
+      <span class="device__island"></span>
+      <div class="device__header">
+        <AliceMark class="device__mark" />
+        <span class="device__name">Alice</span>
+      </div>
+      <ol class="device__thread">
+        <li class="msg msg--user" style="--i: 0">{d.userMessage}</li>
+        <li class="msg msg--agent" style="--i: 1">{d.agentMessage}</li>
+        <li class="msg activity" style="--i: 2">
+          <ul class="activity__list">
+            {d.activity.map((row) => (
+              <li class="activity__row">
+                <svg class="activity__check" viewBox="0 0 12 12" focusable="false">
+                  <path d="M2.5 6.25 5 8.5l4.5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>{row}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li class="msg browser" style="--i: 3">
+          <div class="browser__bar">
+            <span class="browser__dot"></span>
+            <span class="browser__title">{d.browserTitle}</span>
+            <span class="browser__live">{d.browserLive}</span>
+          </div>
+          <div class="browser__page">
+            <span class="browser__line browser__line--1"></span>
+            <span class="browser__line browser__line--2"></span>
+            <span class="browser__line browser__line--3"></span>
+          </div>
+          <span class="device-btn device-btn--secondary browser__action">{d.browserAction}</span>
+        </li>
+        <li class="msg approval" style="--i: 4">
+          <span class="approval__label">{d.approvalLabel}</span>
+          <p class="approval__text">{d.approvalText}</p>
+          <p class="approval__total"><span>{d.totalLabel}</span><span class="approval__amount">{d.totalValue}</span></p>
+          <div class="approval__actions">
+            <span class="device-btn device-btn--secondary">{d.cancel}</span>
+            <span class="device-btn device-btn--primary">{d.pay}</span>
+          </div>
+        </li>
+      </ol>
+      <div class="device__composer">{d.composer}</div>
+    </div>
+  </div>
+  <p class="sr-only">{d.srDescription}</p>
+  <figcaption class="device-figure__caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .device-figure {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+  }
+
+  .device {
+    width: var(--device-width);
+    aspect-ratio: var(--device-aspect);
+    padding: var(--device-bezel);
+    border: var(--border-width) solid var(--color-device-border);
+    border-radius: var(--radius-device);
+    background: var(--color-device-frame);
+  }
+
+  .device__screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: var(--device-screen-pad-top) var(--device-screen-pad) var(--device-screen-pad);
+    overflow: hidden;
+    border-radius: var(--radius-device-screen);
+    background: var(--color-device-screen);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-device);
+    line-height: var(--leading-device);
+  }
+
+  .device__island {
+    position: absolute;
+    inset-block-start: var(--device-island-top);
+    inset-inline-start: 50%;
+    width: var(--device-island-width);
+    height: var(--device-island-height);
+    border-radius: var(--radius-full);
+    background: var(--color-device-frame);
+    transform: translateX(-50%);
+  }
+
+  .device__header {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-1);
+    margin-bottom: var(--device-gap);
+    color: var(--color-text);
+  }
+
+  .device__header :global(.device__mark) {
+    width: var(--device-mark);
+    height: var(--device-mark);
+  }
+
+  .device__name {
+    font-family: var(--font-serif);
+    font-size: var(--text-device);
+    line-height: var(--leading-tight);
+  }
+
+  .device__thread {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--device-gap);
+  }
+
+  .msg--user {
+    align-self: flex-end;
+    max-width: var(--device-bubble-max);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius);
+    background: var(--color-accent-soft);
+  }
+
+  .msg--agent {
+    align-self: flex-start;
+  }
+
+  .activity__list {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .activity__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-device-small);
+    color: var(--color-text-muted);
+  }
+
+  .activity__check {
+    flex: none;
+    width: var(--device-icon);
+    height: var(--device-icon);
+    color: var(--color-accent);
+  }
+
+  .browser,
+  .approval {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+  }
+
+  .browser__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-device-small);
+  }
+
+  .browser__dot {
+    width: var(--size-dot);
+    height: var(--size-dot);
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+  }
+
+  .browser__title {
+    color: var(--color-text-muted);
+  }
+
+  .browser__live {
+    margin-inline-start: auto;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+  }
+
+  .browser__page {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border-radius: var(--radius-xs);
+    background: var(--color-surface-sunken);
+  }
+
+  .browser__line {
+    display: block;
+    height: var(--device-skeleton);
+    border-radius: var(--radius-full);
+    background: var(--color-border);
+  }
+
+  .browser__line--1 { width: 100%; }
+  .browser__line--2 { width: 80%; }
+  .browser__line--3 { width: 60%; }
+
+  .browser__action {
+    justify-self: start;
+  }
+
+  .approval {
+    border-color: var(--color-accent);
+    background: var(--color-surface);
+  }
+
+  .approval__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-device-small);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .approval__total {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-text-muted);
+  }
+
+  .approval__amount {
+    color: var(--color-text);
+    font-weight: var(--weight-medium);
+  }
+
+  .approval__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+
+  .device-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--device-button);
+    padding-inline: var(--space-3);
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius);
+    font-size: var(--text-device-small);
+    font-weight: var(--weight-medium);
+  }
+
+  .device-btn--secondary {
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+  }
+
+  .device-btn--primary {
+    background: var(--color-button-primary-bg);
+    color: var(--color-button-primary-text);
+  }
+
+  .device__composer {
+    margin-top: var(--device-gap);
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-text-subtle);
+  }
+
+  .device-figure__caption {
+    max-width: var(--device-width);
+    font-size: var(--text-label);
+    line-height: var(--leading-small);
+    color: var(--color-text-subtle);
+    text-align: center;
+  }
+
+  /* Enter with a clip wipe + small rise, never opacity: the text keeps its
+     real color on every frame, so contrast holds even mid-animation. */
+  @keyframes device-in {
+    from {
+      clip-path: inset(0 0 100% 0);
+      transform: translateY(var(--motion-distance-small));
+    }
+    to {
+      clip-path: inset(0);
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .msg {
+      animation: device-in var(--duration-slow) var(--ease-out) both;
+      animation-delay: calc(var(--device-delay) + var(--i) * var(--device-step));
+    }
+  }
+</style>

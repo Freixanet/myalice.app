@@ -1,0 +1,240 @@
+// Spanish copy for myalice.app/es/. Mirrors en.ts key by key. Do not edit wording.
+import type { Copy } from './en';
+
+export const es: Copy = {
+  lang: 'es',
+  locale: 'es_ES',
+  meta: {
+    title: 'Alice — tu propio agente Hermes, en tu iPhone',
+    description:
+      'Una app nativa de iPhone para tu propio agente Hermes. Háblale, mira cómo trabaja y toma las decisiones. Tus claves se quedan en tu Mac.',
+    ogImage: '/og/og-es.png',
+    ogImageAlt: 'Alice. Tu propio agente. En tu iPhone. Una app nativa de iPhone para tu propio agente Hermes.',
+  },
+  skipLink: 'Saltar al contenido',
+  nav: {
+    ariaLabel: 'Secciones',
+    homeLabel: 'Alice, inicio',
+    links: [
+      { href: '#how', label: 'Cómo funciona' },
+      { href: '#status', label: 'Estado' },
+      { href: '#faq', label: 'Preguntas' },
+    ],
+    langSwitch: { href: '/', label: 'EN', ariaLabel: 'Read in English', hreflang: 'en' },
+    github: 'GitHub',
+  },
+  hero: {
+    eyebrow: 'Para tu propio Hermes · iOS 26',
+    titleLine1: 'Tu propio agente.',
+    titleLine2: 'En tu iPhone.',
+    lead:
+      'Una app nativa de iPhone para tu propio agente Hermes: háblale, mira cómo trabaja y deja que te haga recados. Hermes y las claves de tu modelo se quedan en tu Mac o en tu servidor.',
+    primaryCta: 'Compílala con Xcode',
+    secondaryCta: 'Ver en GitHub',
+    meta: ['Proyecto personal', 'No está en la App Store', 'MIT'],
+    caption: 'Ilustración conceptual. La interfaz de la app evoluciona a medida que mejora.',
+  },
+  device: {
+    srDescription:
+      'Ilustración conceptual de una conversación en Alice. Haces un pedido. Hermes busca en la tienda, comprueba precio y stock, rellena la cesta y la entrega, enseña su navegador en vivo y espera tu Pagar en una tarjeta de aprobación.',
+    userMessage: 'Pide 1 kg de café en grano en la tienda de siempre.',
+    agentMessage: 'Voy. Te enseño el total antes de pagar.',
+    activity: ['Buscando en la tienda', 'Comprobando precio y stock', 'Rellenando cesta y entrega'],
+    browserTitle: 'Navegador del agente',
+    browserLive: 'En vivo',
+    browserAction: 'Tomar el control',
+    approvalLabel: 'Aprobación',
+    approvalText: 'Alice pagará en este sitio con tu Visa ···4242',
+    totalLabel: 'Total',
+    totalValue: '18,90 €',
+    cancel: 'Cancelar',
+    pay: 'Pagar',
+    composer: 'Habla con Alice…',
+  },
+  workflow: {
+    title: 'Del pensamiento a la tarea.',
+    intro:
+      'Habla con naturalidad. Sigue el trabajo. Toma las decisiones. Alice reúne en tu iPhone la conversación, la actividad de las herramientas y las peticiones de aprobación.',
+    panels: [
+      {
+        label: '01 / Conversación',
+        title: 'Un pensamiento.',
+        body: 'Empieza con una conversación. Respuestas en streaming, actividad de herramientas, Markdown, adjuntos y elección de modelo.',
+      },
+      {
+        label: '02 / Visibilidad',
+        title: 'El trabajo, a la vista.',
+        body: 'Sigue lo que hace Hermes. Cada agente conserva su propia conversación y su sesión de Hermes.',
+      },
+      {
+        label: '03 / Control',
+        title: 'Tu decisión.',
+        body: 'Responde a las peticiones de aprobación. Llegan como tarjetas que dicen qué aprueban, no como un comando en bruto.',
+      },
+    ],
+  },
+  why: {
+    title: 'Donde un bot de mensajería se queda corto.',
+    intro:
+      'En el móvil sueles hablar con Hermes a través de un bot de mensajería. Para preguntas funciona. Funciona peor cuando el agente está comprando algo, iniciando sesión en una web o necesita tu aprobación a mitad de una tarea.',
+    items: [
+      {
+        number: '01',
+        title: 'El navegador del agente, en vivo.',
+        body: 'La página en la que está el agente aparece en el chat mientras navega. Tócala para tomar el control y devuélveselo después.',
+      },
+      {
+        number: '02',
+        title: 'Hojas seguras en vez de pegar secretos.',
+        body: 'Un inicio de sesión, un código de un solo uso, una clave de API o una tarjeta van directos a la bóveda de Hermes en tu Mac. El chat solo sabe que se guardó.',
+      },
+      {
+        number: '03',
+        title: 'Nada irreversible sin tu «Pagar».',
+        body: 'Un paso irreversible, como pagar, espera un «Pagar» explícito tuyo. La aprobación indica el total exacto.',
+      },
+      {
+        number: '04',
+        title: 'Tus claves se quedan en tu Mac.',
+        body: 'Hermes y las claves de tu modelo se quedan en tu Mac o en tu servidor. Sin infraestructura de notificaciones push y sin una nube propia.',
+      },
+    ],
+    specimens: {
+      browserTitle: 'Navegador del agente',
+      browserLive: 'En vivo',
+      browserAction: 'Tomar el control',
+      sheetTitle: 'Tarjeta de pago',
+      sheetField: 'Número de tarjeta',
+      sheetValue: '•••• •••• •••• 4242',
+      sheetSave: 'Guardar en Hermes',
+      sheetResult: 'Tarjeta guardada.',
+      payText: 'Alice pagará en este sitio con tu Visa ···4242',
+      payTotalLabel: 'Total',
+      payTotalValue: '18,90 €',
+      payCancel: 'Cancelar',
+      payButton: 'Pagar',
+      keysPhone: 'iPhone',
+      keysPhoneDetail: 'Conexión en el llavero',
+      keysMac: 'Tu Mac',
+      keysMacDetail: 'Hermes · claves del modelo · bóveda',
+    },
+  },
+  how: {
+    title: 'Cómo funciona.',
+    intro:
+      'El teléfono nunca se convierte en el servidor. El iPhone habla con tu Hermes a través de tu red, en la misma red o mediante Tailscale.',
+    diagram: {
+      title: 'Alice en el iPhone habla con Hermes en tu Mac, que habla con tu proveedor de modelos.',
+      phone: 'Tu iPhone',
+      phoneDetail: 'Alice',
+      link1: 'Tu red o Tailscale',
+      mac: 'Tu Mac o servidor',
+      macDetail1: 'Hermes 0.21.x',
+      macDetail2: 'Plugin de Alice',
+      macDetail3: 'Bóveda',
+      link2: 'Tus claves del modelo',
+      provider: 'Proveedor de modelos',
+      providerDetail: 'El que tú configures',
+    },
+    steps: [
+      {
+        title: 'Añade el plugin de Alice a Hermes.',
+        body: 'En la máquina que ejecuta Hermes, lanza el script de instalación desde una copia del repositorio. Añade el QR de emparejamiento y lo que la app necesita de Hermes.',
+        code: 'hermes-plugin/install.sh',
+      },
+      {
+        title: 'Compila la app en tu iPhone.',
+        body: 'Genera el proyecto de Xcode con XcodeGen, elige tu equipo en Signing, selecciona tu iPhone y pulsa Run.',
+        code: 'cd ios && xcodegen generate',
+      },
+      {
+        title: 'Empareja.',
+        body: 'Abre la pestaña Alice en el panel de Hermes y escanea el QR con la cámara del iPhone. Alice guarda la conexión en el llavero del iPhone.',
+        code: '',
+      },
+    ],
+    noteTitle: 'Hermes oficial, sin fork.',
+    noteBody:
+      'Todo lo que Alice necesita del servidor vive en un plugin de Hermes que usa sus hooks públicos. Actualizar Hermes no sobrescribe Alice. La seguridad propia de Hermes sigue al mando: Alice añade comprobaciones encima y nunca quita ninguna.',
+  },
+  status: {
+    title: 'Estado, sin adornos.',
+    intro:
+      'Un proyecto personal en uso y desarrollo diarios. No está en la App Store; se compila con Xcode. Necesita iOS 26 y un Hermes que ejecutes tú.',
+    todayTitle: 'Funciona hoy, en uso diario',
+    today: [
+      { title: 'Chat con Hermes y sus agentes', body: 'Respuestas en streaming, actividad de herramientas, Markdown, adjuntos y elección de modelo.' },
+      { title: 'El navegador del agente, en vivo', body: 'Tócalo para tomar el control y devuélveselo después.' },
+      { title: 'Hojas seguras en vez de pegar secretos', body: 'El chat solo sabe que se guardó.' },
+      { title: 'Aprobaciones que dicen qué aprueban', body: 'Tarjetas en el chat en lugar de un comando en bruto.' },
+      { title: 'Resúmenes de mañana y de noche', body: 'Citas, recordatorios, objetivos abiertos, la salud del Mac y los errores registrados durante la noche.' },
+      { title: 'Agenda, objetivos y notas', body: 'Tu calendario y tus recordatorios se comparten con tu propio Hermes, nunca con terceros.' },
+      { title: 'Conexiones', body: 'El catálogo de conectores de Hermes, para conectar o desconectar desde el teléfono.' },
+      { title: 'Otros canales', body: 'La misma Alice responde en Telegram y en iMessage.' },
+    ],
+    provingTitle: 'Construido, aún en prueba en el uso diario',
+    proving: [
+      { title: 'Comprar online hasta el pago', body: 'Se detiene en tu único «Pagar». Todavía no es lo bastante fiable como para dejarlo sin supervisión.' },
+      { title: 'Tareas que siguen hasta terminar', body: 'Un modelo juez solo acepta «hecho» con una prueba, como un número de pedido.' },
+      { title: 'Avisos por lugar', body: 'El iPhone solo le dice a Hermes que llegaste o te fuiste, nunca dónde estás.' },
+      { title: 'Salud', body: 'El resumen de la mañana solo menciona lo que se aparta claramente de tus últimas cuatro semanas.' },
+      { title: 'Voz a la que puedes interrumpir', body: 'Un modo manos libres con el reconocimiento y las voces del propio iPhone.' },
+      { title: 'Aprender de las correcciones', body: 'Una corrección se guarda como instrucción permanente, citando tus palabras.' },
+    ],
+    limitsTitle: 'Limitaciones',
+    limits: [
+      { title: 'No está en la App Store.', body: 'Necesitas Xcode y una cuenta de desarrollador de Apple para instalarla.' },
+      { title: 'No es un servicio alojado.', body: 'Necesita un Hermes que ejecutes tú y un proveedor de modelos que pagues tú.' },
+      { title: 'Los agentes dependen del modelo.', body: 'Las tareas web largas, sobre todo comprar, salen bien o mal según la capacidad del modelo.' },
+      { title: 'iOS despierta las apps en segundo plano cuando quiere.', body: 'Con el teléfono bloqueado, una notificación o una aprobación puede esperar a que abras la app.' },
+      { title: 'WhatsApp no está soportado.', body: 'Su API oficial para agentes aún no es pública, y Alice no usa clientes no oficiales de WhatsApp Web.' },
+      { title: 'Comprobada en un iPhone real.', body: 'El Mac de desarrollo no tiene simulador de iOS, así que la app se comprueba compilándola e instalándola en un iPhone real. La CI ejecuta las suites del simulador.' },
+    ],
+  },
+  faq: {
+    title: 'Preguntas.',
+    items: [
+      { q: '¿Está Alice en la App Store?', a: 'No. Se compila con Xcode y una cuenta de desarrollador de Apple, y se ejecuta en tu iPhone.' },
+      { q: '¿Qué necesito?', a: 'Un Mac o un servidor con Hermes 0.21.x y un proveedor de modelos configurado; un Mac con Xcode 26, XcodeGen y una cuenta de desarrollador de Apple; y un iPhone con iOS 26 que llegue a Hermes, en la misma red o mediante Tailscale.' },
+      { q: '¿Alice es un producto de Nous Research?', a: 'No. Es un proyecto independiente. Usa Hermes oficial, sin fork: todo lo que Alice necesita vive en un plugin de Hermes.' },
+      { q: '¿Adónde van mis claves y mis secretos?', a: 'Hermes y las claves de tu modelo se quedan en tu Mac o en tu servidor. Los inicios de sesión, tarjetas, claves y códigos de verificación van a la bóveda de Hermes mediante hojas seguras, nunca al chat. La conexión con Hermes se guarda en el llavero del iPhone.' },
+      { q: '¿Puede pagar cosas por su cuenta?', a: 'No. Un paso irreversible, como pagar, espera un «Pagar» explícito tuyo. Comprar online está construido pero aún en prueba, y todavía no es lo bastante fiable como para dejarlo sin supervisión.' },
+      { q: '¿Funciona con el teléfono bloqueado?', a: 'iOS despierta las apps en segundo plano cuando quiere. Con el teléfono bloqueado, una notificación o una aprobación puede esperar a que abras la app.' },
+      { q: '¿Qué modelo usa?', a: 'El que configures en Hermes. Alice no instala Hermes ni proporciona un modelo. Las tareas web largas salen bien o mal según la capacidad del modelo.' },
+      { q: '¿Funciona con WhatsApp?', a: 'No. La API oficial de WhatsApp para agentes aún no es pública, y Alice no usa clientes no oficiales de WhatsApp Web. La misma Alice responde en Telegram y en iMessage.' },
+    ],
+  },
+  build: {
+    title: 'Compílala con Xcode.',
+    intro:
+      'Alice es código abierto con licencia MIT. Añade el plugin a Hermes en tu Mac, compila la app en tu iPhone y emparéjalos con un QR.',
+    codeLabel: 'Terminal',
+    code: [
+      'git clone https://github.com/Freixanet/alice.git',
+      'cd alice',
+      'hermes-plugin/install.sh',
+      'brew install xcodegen',
+      'cd ios && xcodegen generate',
+      'open Alice.xcodeproj',
+    ],
+    copy: 'Copiar',
+    copied: 'Copiado',
+    primaryCta: 'Abrir el repositorio',
+    secondaryCta: 'Guía de conexión',
+    secondaryHref: 'https://github.com/Freixanet/alice/blob/main/docs/getting-connected.md',
+    guideHref: 'https://github.com/Freixanet/alice#get-started',
+    guideLink: 'README en inglés',
+    requirements: 'Necesita Hermes 0.21.x, Xcode 26 y un iPhone con iOS 26.',
+  },
+  footer: {
+    independent: 'Un proyecto independiente, no un producto de Nous Research.',
+    credit: 'Diseñado y dirigido por Marc Freixanet.',
+    license: 'MIT',
+    links: [
+      { href: 'https://github.com/Freixanet/alice', label: 'GitHub' },
+      { href: 'https://github.com/Freixanet/alice/blob/main/SECURITY.md', label: 'Seguridad' },
+      { href: 'https://github.com/Freixanet/alice/blob/main/docs/getting-connected.md', label: 'Guía de conexión', hreflang: 'es' },
+    ],
+    langSwitch: { href: '/', label: 'English', hreflang: 'en' },
+  },
+};

@@ -1,0 +1,189 @@
+---
+// Section 4 — How it works. An HTML diagram (iPhone ↔ Mac ↔ model provider),
+// three install steps and the "official Hermes, no fork" note.
+import { copy, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const h = copy[locale].how;
+const d = h.diagram;
+---
+
+<section class="section" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <header class="section-header" data-reveal>
+      <h2 id="how-title" class="h2">{h.title}</h2>
+      <p class="lead">{h.intro}</p>
+    </header>
+
+    <figure class="diagram" data-reveal>
+      <figcaption class="sr-only">{d.title}</figcaption>
+      <div class="diagram__flow">
+        <div class="node">
+          <p class="node__name">{d.phone}</p>
+          <p class="node__detail">{d.phoneDetail}</p>
+        </div>
+        <div class="connector" aria-hidden="true">
+          <span class="connector__line"></span>
+          <span class="connector__label">{d.link1}</span>
+        </div>
+        <div class="node node--home">
+          <p class="node__name">{d.mac}</p>
+          <ul class="node__list">
+            <li>{d.macDetail1}</li>
+            <li>{d.macDetail2}</li>
+            <li>{d.macDetail3}</li>
+          </ul>
+        </div>
+        <div class="connector" aria-hidden="true">
+          <span class="connector__line"></span>
+          <span class="connector__label">{d.link2}</span>
+        </div>
+        <div class="node">
+          <p class="node__name">{d.provider}</p>
+          <p class="node__detail">{d.providerDetail}</p>
+        </div>
+      </div>
+    </figure>
+
+    <ol class="steps">
+      {h.steps.map((step, i) => (
+        <li class="step" data-reveal style={`--reveal-index: ${i}`}>
+          <p class="label">{String(i + 1).padStart(2, '0')}</p>
+          <h3 class="h3">{step.title}</h3>
+          <p class="body">{step.body}</p>
+          {step.code && <pre class="step__code" tabindex="0"><code>{step.code}</code></pre>}
+        </li>
+      ))}
+    </ol>
+
+    <div class="note" data-reveal>
+      <h3 class="h3">{h.noteTitle}</h3>
+      <p class="body">{h.noteBody}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .diagram {
+    margin-bottom: var(--space-stack-lg);
+  }
+
+  .diagram__flow {
+    display: grid;
+    justify-items: stretch;
+  }
+
+  .node {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+  }
+
+  .node--home {
+    border-color: var(--color-accent);
+  }
+
+  .node__name {
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+  }
+
+  .node__detail,
+  .node__list {
+    font-family: var(--font-mono);
+    font-size: var(--text-code);
+    line-height: var(--leading-code);
+    color: var(--color-text-muted);
+  }
+
+  .connector {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-3);
+    padding-inline-start: var(--space-6);
+  }
+
+  .connector__line {
+    width: var(--border-width);
+    height: var(--connector-length);
+    background: var(--color-border-strong);
+  }
+
+  .connector__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--space-10);
+    margin-bottom: var(--space-stack-lg);
+  }
+
+  .step {
+    display: grid;
+    align-content: start;
+    gap: var(--space-3);
+    padding-top: var(--space-6);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .step__code {
+    overflow-x: auto;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius);
+    background: var(--color-surface-sunken);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: var(--text-code);
+    line-height: var(--leading-code);
+  }
+
+  .note {
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--measure);
+    padding-top: var(--space-6);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  @media (min-width: 1280px) {
+    .diagram__flow {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+    }
+
+    .connector {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: var(--space-2);
+      padding-inline: var(--space-3);
+    }
+
+    .connector__line {
+      order: 2;
+      width: 100%;
+      height: var(--border-width);
+    }
+
+    .connector__label {
+      order: 1;
+      text-align: center;
+    }
+
+    .steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-8);
+    }
+  }
+</style>
