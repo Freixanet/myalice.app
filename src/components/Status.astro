@@ -1,6 +1,6 @@
 ---
-// Section 5 — Honest status. What works today (filled dot), what is still being
-// proven (hollow dot), and the six limitations from the README.
+// Section 5 — Where we are / What's next. What works today (filled dot), what is in
+// beta (hollow dot), the confirmed roadmap (no dates), and requirements and constraints.
 import { copy, type Locale } from '../i18n';
 
 interface Props {
@@ -40,6 +40,24 @@ const st = copy[locale].status;
           ))}
         </ul>
       </div>
+    </div>
+
+    <div class="roadmap" data-reveal>
+      <h3 class="h3">{st.nextTitle}</h3>
+      <ol class="roadmap__list">
+        <li class="milestone milestone--next">
+          <p class="milestone__tag">{st.nextLabel}</p>
+          <p class="feature__title">{st.next.title}</p>
+          <p class="feature__body">{st.next.body}</p>
+        </li>
+        {st.planned.map((m) => (
+          <li class="milestone">
+            <p class="milestone__tag">{st.plannedLabel}</p>
+            <p class="feature__title">{m.title}</p>
+            <p class="feature__body">{m.body}</p>
+          </li>
+        ))}
+      </ol>
     </div>
 
     <div class="limits" data-reveal>
@@ -116,9 +134,43 @@ const st = copy[locale].status;
     color: var(--color-text-muted);
   }
 
+  .roadmap,
   .limits {
     display: grid;
     gap: var(--space-6);
+  }
+
+  .roadmap {
+    margin-bottom: var(--space-stack-lg);
+  }
+
+  .roadmap__list {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .milestone {
+    display: grid;
+    align-content: start;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .milestone--next {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  .milestone__tag {
+    margin-bottom: var(--space-1);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    line-height: var(--leading-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
   }
 
   .limits__list {
@@ -131,12 +183,17 @@ const st = copy[locale].status;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .limits__list {
+    .limits__list,
+    .roadmap__list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 1280px) {
+    .roadmap__list {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
     .limits__list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }

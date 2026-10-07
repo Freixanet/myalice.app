@@ -1,0 +1,54 @@
+---
+// Founder section. The bio and links are the owner's to write ([MIS DATOS] in the
+// i18n modules and src/site.ts); the section is not rendered until the bio is filled in.
+import { copy, type Locale } from '../i18n';
+import { FOUNDER_LINKS, FOUNDER_NAME, isFilled } from '../site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const f = copy[locale].founder;
+---
+
+{isFilled(f.bio) && (
+  <section class="section" id="founder" aria-labelledby="founder-title">
+    <div class="container founder" data-reveal>
+      <h2 id="founder-title" class="h2">{f.title}</h2>
+      <div class="founder__body">
+        <p class="h3">{FOUNDER_NAME}</p>
+        <p class="label">{f.role}</p>
+        <p class="lead">{f.bio}</p>
+        {FOUNDER_LINKS.length > 0 && (
+          <ul class="founder__links">
+            {FOUNDER_LINKS.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}
+          </ul>
+        )}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .founder {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .founder__body {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .founder__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .founder {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+</style>

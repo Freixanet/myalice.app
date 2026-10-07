@@ -1,0 +1,78 @@
+---
+// Public beta waitlist. A plain HTML form that POSTs to the chosen service
+// (Buttondown or Formspree): no JavaScript, works on GitHub Pages.
+// Not rendered until WAITLIST_FORM_ACTION is set in src/site.ts.
+import { copy, type Locale } from '../i18n';
+import { WAITLIST_ENABLED, WAITLIST_FORM_ACTION } from '../site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const w = copy[locale].waitlist;
+---
+
+{WAITLIST_ENABLED && (
+  <section class="section" id="waitlist" aria-labelledby="waitlist-title">
+    <div class="container waitlist">
+      <header class="section-header waitlist__header" data-reveal>
+        <h2 id="waitlist-title" class="h2">{w.title}</h2>
+        <p class="lead">{w.intro}</p>
+      </header>
+      <form class="waitlist__form" action={WAITLIST_FORM_ACTION} method="post">
+        <label class="waitlist__label" for="waitlist-email">{w.label}</label>
+        <div class="waitlist__row">
+          <input
+            class="waitlist__input"
+            id="waitlist-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            aria-describedby="waitlist-privacy"
+          />
+          <button class="btn btn--primary" type="submit">{w.submit}</button>
+        </div>
+        <p class="small waitlist__privacy" id="waitlist-privacy">{w.privacy}</p>
+      </form>
+    </div>
+  </section>
+)}
+
+<style>
+  .waitlist__header {
+    margin-bottom: var(--space-8);
+  }
+
+  .waitlist__form {
+    display: grid;
+    gap: var(--space-3);
+    max-width: var(--measure);
+  }
+
+  .waitlist__label {
+    font-weight: var(--weight-medium);
+  }
+
+  .waitlist__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .waitlist__input {
+    flex: 1 1 var(--specimen-max);
+    min-width: 0;
+    min-height: var(--size-button);
+    padding-inline: var(--space-4);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+  }
+
+  .waitlist__privacy {
+    color: var(--color-text-muted);
+  }
+</style>

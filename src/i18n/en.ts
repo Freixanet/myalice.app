@@ -1,5 +1,5 @@
-// English copy for myalice.app. Every sentence traces to the Alice README
-// (see 04-SECTIONS.md, traceability table). Do not edit wording.
+// English copy for myalice.app. Every sentence traces to the Alice README or to a fact
+// the owner confirmed (startup copy revision, 2026-10-07). Do not edit wording without that trace.
 export const en = {
   lang: 'en',
   locale: 'en_US',
@@ -23,15 +23,16 @@ export const en = {
     github: 'GitHub',
   },
   hero: {
-    eyebrow: 'For your own Hermes · iOS 26',
+    eyebrow: 'Your Hermes agent, native on iPhone',
     titleLine1: 'Your own agent.',
     titleLine2: 'On your iPhone.',
     lead:
       'A native iPhone app for your own Hermes agent: talk to it, watch it work and let it run errands for you. Hermes and your model keys stay on your own Mac or server.',
-    primaryCta: 'Build it with Xcode',
+    primaryCta: 'Join the public beta waitlist',
+    primaryCtaDeveloper: 'Build it with Xcode',
     secondaryCta: 'View on GitHub',
-    meta: ['Personal project', 'Not on the App Store', 'MIT'],
-    caption: 'Conceptual illustration. The app’s interface evolves as it improves.',
+    meta: ['Open-source beta for developers', 'iOS 26', 'MIT'],
+    caption: 'Concept render; the interface evolves with each release.',
   },
   device: {
     srDescription:
@@ -157,10 +158,10 @@ export const en = {
       'Everything Alice needs from the server lives in a Hermes plugin that uses its public hooks. Updating Hermes does not overwrite Alice. Hermes’ own safety stays in charge: Alice adds checks on top and never removes any.',
   },
   status: {
-    title: 'Honest status.',
+    title: 'Where we are.',
     intro:
-      'A personal project in active daily use and development. It is not on the App Store; you build it with Xcode. It needs iOS 26 and a Hermes you run yourself.',
-    todayTitle: 'Works today, used daily',
+      'An open-source beta for developers, in daily use and active development. Today you install it by building it with Xcode; a TestFlight beta is the next milestone. It needs iOS 26 and a Hermes you run yourself.',
+    todayTitle: 'Works today',
     today: [
       { title: 'Chat with Hermes and its agents', body: 'Streaming replies, tool activity, Markdown, attachments and model choice.' },
       { title: 'A live view of the agent’s browser', body: 'Tap it to take control, then hand it back.' },
@@ -171,7 +172,7 @@ export const en = {
       { title: 'Connections', body: 'Hermes’ connector catalogue, to connect or disconnect from the phone.' },
       { title: 'Other channels', body: 'The same Alice answers in Telegram and in iMessage.' },
     ],
-    provingTitle: 'Built, still being proven in daily use',
+    provingTitle: 'In beta: built, being hardened in daily use',
     proving: [
       { title: 'Buying online up to the payment', body: 'It stops at your one “Pay”. It is not yet reliable enough to leave unattended.' },
       { title: 'Tasks that keep going until they are done', body: 'A judge model accepts “done” only with proof, such as an order number.' },
@@ -180,31 +181,59 @@ export const en = {
       { title: 'Voice you can talk over', body: 'A hands-free mode on the iPhone’s own recogniser and voices.' },
       { title: 'Learning from corrections', body: 'A correction is kept as a standing instruction, quoting your words.' },
     ],
-    limitsTitle: 'Limitations',
+    nextTitle: 'What’s next',
+    nextLabel: 'Next',
+    next: { title: 'TestFlight beta', body: 'Install Alice without building it yourself.' },
+    plannedLabel: 'Planned',
+    planned: [
+      { title: 'Public beta', body: 'Open to anyone, after the TestFlight beta.' },
+      { title: 'Purchases you can leave unattended', body: 'Today buying online stops at your “Pay” and still needs you watching.' },
+      { title: 'App Store', body: 'Install it like any other app.' },
+      { title: 'WhatsApp', body: 'When WhatsApp’s official agent API is public.' },
+    ],
+    limitsTitle: 'Requirements and known constraints',
     limits: [
-      { title: 'Not on the App Store.', body: 'You need Xcode and an Apple developer account to install it.' },
-      { title: 'Not a hosted service.', body: 'It needs a Hermes you run yourself and a model provider you pay for.' },
-      { title: 'Agents depend on the model.', body: 'Long web tasks, buying in particular, succeed or fail with the model’s ability.' },
+      { title: 'Distributed as source today.', body: 'You build it with Xcode and an Apple developer account. A TestFlight beta is next.' },
+      { title: 'Self-hosted by design.', body: 'It runs on a Hermes you run yourself and the model provider you choose. There is no Alice cloud holding your data.' },
+      { title: 'Model-agnostic.', body: 'It uses the model you configure. Long web tasks, buying in particular, are only as good as that model.' },
       { title: 'iOS wakes background apps when it chooses.', body: 'When the phone is locked, a notification or approval can wait until you open the app.' },
-      { title: 'WhatsApp is not supported.', body: 'Its official agent API is not public yet, and Alice does not use unofficial WhatsApp Web clients.' },
-      { title: 'Checked on a real iPhone.', body: 'The development Mac has no iOS simulator, so the app is checked by building and installing it on a real iPhone. CI runs the simulator suites.' },
+      { title: 'Telegram and iMessage today.', body: 'WhatsApp’s official agent API is not public yet, and Alice does not use unofficial WhatsApp Web clients.' },
     ],
   },
   faq: {
     title: 'Questions.',
+    tryHint: 'Join the waitlist to hear when it opens.',
     items: [
-      { q: 'Is Alice on the App Store?', a: 'No. You build it with Xcode and an Apple developer account, then run it on your iPhone.' },
+      { q: 'How can I try Alice?', a: 'Today as an open-source beta for developers: you build it with Xcode and an Apple developer account, then run it on your iPhone. A TestFlight beta is next.' },
       { q: 'What do I need?', a: 'A Mac or server running Hermes 0.21.x with a model provider configured; a Mac with Xcode 26, XcodeGen and an Apple developer account; and an iPhone with iOS 26 that can reach Hermes, on the same network or through Tailscale.' },
-      { q: 'Is Alice made by Nous Research?', a: 'No. It is an independent project. It uses official Hermes with no fork: everything Alice needs lives in a Hermes plugin.' },
+      { q: 'Is Alice made by Nous Research?', a: 'No. Alice is independent and not affiliated with Nous Research. It uses official Hermes with no fork: everything Alice needs lives in a Hermes plugin.' },
       { q: 'Where do my keys and secrets go?', a: 'Hermes and your model keys stay on your own Mac or server. Logins, cards, keys and verification codes go to Hermes’ vault through secure sheets, never into the chat. The connection to Hermes is saved in the iPhone’s Keychain.' },
       { q: 'Can it pay for things on its own?', a: 'No. An irreversible step, such as paying, waits for one explicit “Pay” from you. Buying online is built but still being proven, and not yet reliable enough to leave unattended.' },
       { q: 'Does it work while the phone is locked?', a: 'iOS wakes background apps when it chooses. When the phone is locked, a notification or approval can wait until you open the app.' },
       { q: 'Which model does it use?', a: 'The one you configure in Hermes. Alice does not install Hermes or provide a model. Long web tasks succeed or fail with the model’s ability.' },
-      { q: 'Does it work with WhatsApp?', a: 'No. WhatsApp’s official agent API is not public yet, and Alice does not use unofficial WhatsApp Web clients. The same Alice answers in Telegram and in iMessage.' },
+      { q: 'Does it work with WhatsApp?', a: 'No. WhatsApp’s official agent API is not public yet, and Alice does not use unofficial WhatsApp Web clients. It is on the roadmap for when that API is public. Today the same Alice answers in Telegram and in iMessage.' },
     ],
   },
+  video: {
+    title: 'See it in 60 seconds.',
+    play: 'Play the 60-second demo',
+    iframeTitle: 'Alice demo video',
+    note: 'The video plays from YouTube (youtube-nocookie.com) when you press play.',
+  },
+  waitlist: {
+    title: 'Join the public beta.',
+    intro: 'Leave your email to hear when the TestFlight beta opens.',
+    label: 'Email',
+    submit: 'Join the waitlist',
+    privacy: 'Your email is only used to tell you about the Alice beta. Ask to be removed at any time.',
+  },
+  founder: {
+    title: 'Who is building it.',
+    role: 'Founder',
+    bio: '[MIS DATOS]',
+  },
   build: {
-    title: 'Build it with Xcode.',
+    title: 'Developer beta: build it today.',
     intro:
       'Alice is open source under the MIT license. Add the plugin to Hermes on your Mac, build the app onto your iPhone and pair them with a QR.',
     codeLabel: 'Terminal',
@@ -226,7 +255,7 @@ export const en = {
     requirements: 'Needs Hermes 0.21.x, Xcode 26 and an iPhone with iOS 26.',
   },
   footer: {
-    independent: 'An independent project, not a Nous Research product.',
+    independent: 'Independent. Built on Nous Research’s open Hermes agent; not affiliated with Nous Research.',
     credit: 'Designed and directed by Marc Freixanet.',
     license: 'MIT',
     links: [
