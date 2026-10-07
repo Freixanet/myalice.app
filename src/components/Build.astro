@@ -1,0 +1,144 @@
+---
+// Section 7 — Final CTA. The six README commands are the call to action.
+// The copy button is progressive enhancement: hidden until the inline script runs.
+import { copy, type Locale } from '../i18n';
+import { GITHUB_URL } from '../site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const b = copy[locale].build;
+const commands = b.code.join('\n');
+---
+
+<section class="section" id="build" aria-labelledby="build-title">
+  <div class="container build">
+    <div class="build__copy" data-reveal>
+      <h2 id="build-title" class="h2">{b.title}</h2>
+      <p class="lead">{b.intro}</p>
+      <div class="build__ctas">
+        <a class="btn btn--primary" href={GITHUB_URL}>{b.primaryCta}</a>
+        <a class="btn btn--secondary" href={b.secondaryHref}>{b.secondaryCta}</a>
+      </div>
+      <p class="small">{b.requirements} <a class="link" href={b.guideHref}>{b.guideLink}</a></p>
+    </div>
+
+    <div class="terminal" data-reveal style="--reveal-index: 1">
+      <div class="terminal__bar">
+        <span class="terminal__label">{b.codeLabel}</span>
+        <button class="terminal__copy" type="button" hidden data-copy={commands} data-label-copied={b.copied}>{b.copy}</button>
+        <span class="sr-only" aria-live="polite" data-copy-status></span>
+      </div>
+      <pre class="terminal__code" tabindex="0"><code>{b.code.map((line) => <span class="terminal__line">{line}</span>)}</code></pre>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const button = document.querySelector('[data-copy]');
+    const status = document.querySelector('[data-copy-status]');
+    if (!button || !navigator.clipboard) return;
+    const label = button.textContent;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(button.dataset.copy);
+      button.textContent = button.dataset.labelCopied;
+      status.textContent = button.dataset.labelCopied;
+      setTimeout(() => { button.textContent = label; status.textContent = ''; }, 2000);
+    });
+  })();
+</script>
+
+<style>
+  .build {
+    display: grid;
+    gap: var(--space-stack-lg);
+  }
+
+  .build__copy {
+    display: grid;
+    align-content: start;
+    gap: var(--space-6);
+  }
+
+  .build__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .terminal {
+    min-width: 0;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-panel-dark-bg);
+    color: var(--color-panel-dark-text);
+  }
+
+  .terminal__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-6);
+    border-bottom: var(--border-width) solid var(--color-panel-dark-muted);
+  }
+
+  .terminal__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-panel-dark-muted);
+  }
+
+  .terminal__copy {
+    min-height: var(--size-touch);
+    padding-inline: var(--space-4);
+    border: var(--border-width) solid var(--color-panel-dark-muted);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-panel-dark-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .terminal__copy:active {
+    transform: scale(var(--motion-press-scale));
+  }
+
+  .terminal__copy:focus-visible,
+  .terminal__code:focus-visible {
+    outline-color: var(--color-panel-dark-text);
+  }
+
+  .terminal__code {
+    overflow-x: auto;
+    padding: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--text-code);
+    line-height: var(--leading-code);
+  }
+
+  .terminal__line {
+    display: block;
+  }
+
+  .terminal__line::before {
+    content: "$ ";
+    color: var(--color-panel-dark-muted);
+    user-select: none;
+  }
+
+  @media (min-width: 1280px) {
+    .build {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      align-items: center;
+    }
+  }
+</style>
