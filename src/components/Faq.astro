@@ -1,0 +1,98 @@
+---
+// Section 6 — FAQ. Native <details>/<summary>: keyboard and screen reader
+// support for free, works without JavaScript. Only the plus icon animates.
+import { copy, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const f = copy[locale].faq;
+---
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container faq">
+    <header class="faq__header" data-reveal>
+      <h2 id="faq-title" class="h2">{f.title}</h2>
+    </header>
+    <div class="faq__list" data-reveal>
+      {f.items.map((item) => (
+        <details class="faq__item">
+          <summary class="faq__q">
+            <span>{item.q}</span>
+            <svg class="faq__icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M8 2v12M2 8h12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </summary>
+          <p class="faq__a">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    display: grid;
+    gap: var(--space-stack-lg);
+  }
+
+  .faq__list {
+    max-width: var(--measure-faq);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  .faq__item {
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    min-height: var(--size-touch);
+    padding-block: var(--space-5);
+    font-size: var(--text-lead);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-lead);
+    color: var(--color-text);
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__q:hover {
+    color: var(--color-accent-strong);
+  }
+
+  .faq__icon {
+    flex: none;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+    color: var(--color-accent);
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(var(--rotate-open));
+  }
+
+  .faq__a {
+    max-width: var(--measure);
+    padding-bottom: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+  }
+
+  @media (min-width: 1280px) {
+    .faq {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      align-items: start;
+    }
+  }
+</style>
