@@ -1,0 +1,144 @@
+---
+// Section 5 — Honest status. What works today (filled dot), what is still being
+// proven (hollow dot), and the six limitations from the README.
+import { copy, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const st = copy[locale].status;
+---
+
+<section class="section" id="status" aria-labelledby="status-title">
+  <div class="container">
+    <header class="section-header" data-reveal>
+      <h2 id="status-title" class="h2">{st.title}</h2>
+      <p class="lead">{st.intro}</p>
+    </header>
+
+    <div class="columns">
+      <div class="column" data-reveal style="--reveal-index: 0">
+        <h3 class="column__title"><span class="state state--today" aria-hidden="true"></span>{st.todayTitle}</h3>
+        <ul class="features">
+          {st.today.map((f) => (
+            <li class="feature">
+              <p class="feature__title">{f.title}</p>
+              <p class="feature__body">{f.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="column" data-reveal style="--reveal-index: 1">
+        <h3 class="column__title"><span class="state state--proving" aria-hidden="true"></span>{st.provingTitle}</h3>
+        <ul class="features">
+          {st.proving.map((f) => (
+            <li class="feature">
+              <p class="feature__title">{f.title}</p>
+              <p class="feature__body">{f.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="limits" data-reveal>
+      <h3 class="h3">{st.limitsTitle}</h3>
+      <ul class="limits__list">
+        {st.limits.map((l) => (
+          <li class="limit">
+            <p class="feature__title">{l.title}</p>
+            <p class="feature__body">{l.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .columns {
+    display: grid;
+    gap: var(--space-12);
+    margin-bottom: var(--space-stack-lg);
+  }
+
+  .column__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-bottom: var(--space-4);
+    border-bottom: var(--border-width) solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .state {
+    flex: none;
+    width: var(--size-dot);
+    height: var(--size-dot);
+    border-radius: var(--radius-full);
+  }
+
+  .state--today {
+    background: var(--color-accent);
+  }
+
+  .state--proving {
+    border: var(--border-width) solid var(--color-accent);
+  }
+
+  .features {
+    display: grid;
+  }
+
+  .feature,
+  .limit {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-4);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .feature__title {
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+  }
+
+  .feature__body {
+    font-size: var(--text-small);
+    line-height: var(--leading-small);
+    color: var(--color-text-muted);
+  }
+
+  .limits {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .limits__list {
+    display: grid;
+    column-gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .columns {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .limits__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .limits__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
