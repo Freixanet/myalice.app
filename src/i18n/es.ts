@@ -24,7 +24,6 @@ export const es: Copy = {
     github: 'GitHub',
   },
   hero: {
-    eyebrow: 'Tu agente Hermes, nativo en el iPhone',
     titleLine1: 'Tu propio agente.',
     titleLine2: 'En tu iPhone.',
     lead:
@@ -32,7 +31,7 @@ export const es: Copy = {
     primaryCta: 'Apúntate a la beta pública',
     primaryCtaDeveloper: 'Compílala con Xcode',
     secondaryCta: 'Ver en GitHub',
-    meta: ['Beta open source para desarrolladores', 'iOS 26', 'MIT'],
+    meta: 'Una beta open source para desarrolladores. iOS 26, licencia MIT.',
     caption: 'Render conceptual; la interfaz evoluciona con cada versión.',
   },
   device: {
@@ -58,17 +57,14 @@ export const es: Copy = {
       'Habla con naturalidad. Sigue el trabajo. Toma las decisiones. Alice reúne en tu iPhone la conversación, la actividad de las herramientas y las peticiones de aprobación.',
     panels: [
       {
-        label: '01 / Conversación',
         title: 'Un pensamiento.',
         body: 'Empieza con una conversación. Respuestas en streaming, actividad de herramientas, Markdown, adjuntos y elección de modelo.',
       },
       {
-        label: '02 / Visibilidad',
         title: 'El trabajo, a la vista.',
         body: 'Sigue lo que hace Hermes. Cada agente conserva su propia conversación y su sesión de Hermes.',
       },
       {
-        label: '03 / Control',
         title: 'Tu decisión.',
         body: 'Responde a las peticiones de aprobación. Llegan como tarjetas que dicen qué aprueban, no como un comando en bruto.',
       },
@@ -80,22 +76,18 @@ export const es: Copy = {
       'En el móvil sueles hablar con Hermes a través de un bot de mensajería. Para preguntas funciona. Funciona peor cuando el agente está comprando algo, iniciando sesión en una web o necesita tu aprobación a mitad de una tarea.',
     items: [
       {
-        number: '01',
         title: 'El navegador del agente, en vivo.',
         body: 'La página en la que está el agente aparece en el chat mientras navega. Tócala para tomar el control y devuélveselo después.',
       },
       {
-        number: '02',
         title: 'Hojas seguras en vez de pegar secretos.',
         body: 'Un inicio de sesión, un código de un solo uso, una clave de API o una tarjeta van directos a la bóveda de Hermes en tu Mac. El chat solo sabe que se guardó.',
       },
       {
-        number: '03',
         title: 'Nada irreversible sin tu «Pagar».',
         body: 'Un paso irreversible, como pagar, espera un «Pagar» explícito tuyo. La aprobación indica el total exacto.',
       },
       {
-        number: '04',
         title: 'Tus claves se quedan en tu Mac.',
         body: 'Hermes y las claves de tu modelo se quedan en tu Mac o en tu servidor. Sin infraestructura de notificaciones push y sin una nube propia.',
       },
@@ -117,7 +109,7 @@ export const es: Copy = {
       keysPhone: 'iPhone',
       keysPhoneDetail: 'Conexión en el llavero',
       keysMac: 'Tu Mac',
-      keysMacDetail: 'Hermes · claves del modelo · bóveda',
+      keysMacDetail: 'Hermes, claves del modelo y bóveda',
     },
   },
   how: {

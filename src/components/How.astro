@@ -13,12 +13,12 @@ const d = h.diagram;
 
 <section class="section" id="how" aria-labelledby="how-title">
   <div class="container">
-    <header class="section-header" data-reveal>
+    <header class="section-header">
       <h2 id="how-title" class="h2">{h.title}</h2>
       <p class="lead">{h.intro}</p>
     </header>
 
-    <figure class="diagram" data-reveal>
+    <figure class="diagram">
       <figcaption class="sr-only">{d.title}</figcaption>
       <div class="diagram__flow">
         <div class="node">
@@ -50,7 +50,7 @@ const d = h.diagram;
 
     <ol class="steps">
       {h.steps.map((step, i) => (
-        <li class="step" data-reveal style={`--reveal-index: ${i}`}>
+        <li class="step">
           <p class="label">{String(i + 1).padStart(2, '0')}</p>
           <h3 class="h3">{step.title}</h3>
           <p class="body">{step.body}</p>
@@ -59,7 +59,7 @@ const d = h.diagram;
       ))}
     </ol>
 
-    <div class="note" data-reveal>
+    <div class="note">
       <h3 class="h3">{h.noteTitle}</h3>
       <p class="body">{h.noteBody}</p>
     </div>

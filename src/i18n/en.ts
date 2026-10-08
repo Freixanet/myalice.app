@@ -23,7 +23,6 @@ export const en = {
     github: 'GitHub',
   },
   hero: {
-    eyebrow: 'Your Hermes agent, native on iPhone',
     titleLine1: 'Your own agent.',
     titleLine2: 'On your iPhone.',
     lead:
@@ -31,7 +30,7 @@ export const en = {
     primaryCta: 'Join the public beta waitlist',
     primaryCtaDeveloper: 'Build it with Xcode',
     secondaryCta: 'View on GitHub',
-    meta: ['Open-source beta for developers', 'iOS 26', 'MIT'],
+    meta: 'An open-source beta for developers. iOS 26, MIT licence.',
     caption: 'Concept render; the interface evolves with each release.',
   },
   device: {
@@ -57,17 +56,14 @@ export const en = {
       'Talk naturally. Follow the work. Make the decisions. Alice brings the conversation, tool activity and approval requests together on your iPhone.',
     panels: [
       {
-        label: '01 / Conversation',
         title: 'A thought.',
         body: 'Start with a conversation. Streaming replies, tool activity, Markdown, attachments and model choice.',
       },
       {
-        label: '02 / Visibility',
         title: 'Work in view.',
         body: 'Follow what Hermes is doing. Each agent keeps its own conversation and Hermes session.',
       },
       {
-        label: '03 / Control',
         title: 'Your decision.',
         body: 'Respond to approval requests. They arrive as cards that say what they approve, not as a raw command.',
       },
@@ -79,22 +75,18 @@ export const en = {
       'On a phone you usually reach Hermes through a messaging bot. That works for questions. It works less well when the agent is buying something, signing in to a site or needs your approval halfway through a task.',
     items: [
       {
-        number: '01',
         title: 'A live view of the agent’s browser.',
         body: 'The page the agent is on appears in the chat as it navigates. Tap it to take control, then hand it back.',
       },
       {
-        number: '02',
         title: 'Secure sheets instead of pasting secrets.',
         body: 'A site login, a one-time code, an API key or a payment card goes straight to Hermes’ vault on your Mac. The chat only learns that it was saved.',
       },
       {
-        number: '03',
         title: 'Nothing irreversible without your “Pay”.',
         body: 'An irreversible step, such as paying, waits for one explicit “Pay” from you. The approval names the exact total.',
       },
       {
-        number: '04',
         title: 'Your keys stay on your Mac.',
         body: 'Hermes and your model keys stay on your own Mac or server. No push infrastructure and no cloud of our own.',
       },
@@ -116,7 +108,7 @@ export const en = {
       keysPhone: 'iPhone',
       keysPhoneDetail: 'Connection in Keychain',
       keysMac: 'Your Mac',
-      keysMacDetail: 'Hermes · model keys · vault',
+      keysMacDetail: 'Hermes, model keys and vault',
     },
   },
   how: {

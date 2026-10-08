@@ -13,14 +13,13 @@ const [p1, p2, p3] = w.panels;
 
 <section class="section" id="workflow" aria-labelledby="workflow-title">
   <div class="container">
-    <header class="section-header" data-reveal>
+    <header class="section-header">
       <h2 id="workflow-title" class="h2">{w.title}</h2>
       <p class="lead">{w.intro}</p>
     </header>
 
     <ol class="panels">
-      <li class="panel panel--conversation" data-reveal style="--reveal-index: 0">
-        <p class="panel__label">{p1.label}</p>
+      <li class="panel panel--conversation">
         <svg class="panel__art" viewBox="0 0 320 160" aria-hidden="true" focusable="false">
           <path class="art-fill-light" d="M70 20h150a16 16 0 0 1 16 16v60a16 16 0 0 1-16 16H118l-30 22v-22H70a16 16 0 0 1-16-16V36a16 16 0 0 1 16-16z" />
           <path class="art-fill-mid" d="M142 66h116a15 15 0 0 1 15 15v48a15 15 0 0 1-15 15h-12v20l-27-20h-77a15 15 0 0 1-15-15V81a15 15 0 0 1 15-15z" />
@@ -30,8 +29,7 @@ const [p1, p2, p3] = w.panels;
         <p class="panel__body">{p1.body}</p>
       </li>
 
-      <li class="panel panel--visibility" data-reveal style="--reveal-index: 1">
-        <p class="panel__label">{p2.label}</p>
+      <li class="panel panel--visibility">
         <svg class="panel__art" viewBox="0 0 320 160" aria-hidden="true" focusable="false">
           <rect class="art-stroke" x="56" y="16" width="208" height="128" rx="12" />
           <path class="art-stroke" d="M56 40h208" />
@@ -44,8 +42,7 @@ const [p1, p2, p3] = w.panels;
         <p class="panel__body">{p2.body}</p>
       </li>
 
-      <li class="panel panel--control" data-reveal style="--reveal-index: 2">
-        <p class="panel__label">{p3.label}</p>
+      <li class="panel panel--control">
         <svg class="panel__art" viewBox="0 0 320 160" aria-hidden="true" focusable="false">
           <circle class="art-ring" cx="160" cy="80" r="64" />
           <circle class="art-fill-mid" cx="160" cy="80" r="46" />
@@ -87,15 +84,6 @@ const [p1, p2, p3] = w.panels;
     color: var(--color-text);
   }
 
-  .panel__label {
-    font-family: var(--font-sans);
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
-    line-height: var(--leading-label);
-    color: var(--color-text-muted);
-  }
-
-  .panel--visibility .panel__label,
   .panel--visibility .panel__body {
     color: var(--color-panel-dark-muted);
   }

@@ -13,7 +13,6 @@ const h = copy[locale].hero;
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="label">{h.eyebrow}</p>
       <h1 id="hero-title" class="display hero__title">
         <span class="hero__line">{h.titleLine1}</span>
         <span class="hero__line">{h.titleLine2}</span>
@@ -25,9 +24,7 @@ const h = copy[locale].hero;
           : <a class="btn btn--primary" href="#build">{h.primaryCtaDeveloper}</a>}
         <a class="btn btn--secondary" href={GITHUB_URL}>{h.secondaryCta}</a>
       </div>
-      <ul class="hero__meta">
-        {h.meta.map((item) => <li>{item}</li>)}
-      </ul>
+      <p class="hero__meta">{h.meta}</p>
     </div>
     <div class="hero__visual">
       <PhoneMockup locale={locale} />
@@ -74,11 +71,6 @@ const h = copy[locale].hero;
     font-size: var(--text-small);
     line-height: var(--leading-small);
     color: var(--color-text-subtle);
-  }
-
-  .hero__meta li + li::before {
-    content: "·";
-    margin-inline-end: var(--space-2);
   }
 
   .hero__visual {

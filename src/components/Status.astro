@@ -12,13 +12,13 @@ const st = copy[locale].status;
 
 <section class="section" id="status" aria-labelledby="status-title">
   <div class="container">
-    <header class="section-header" data-reveal>
+    <header class="section-header">
       <h2 id="status-title" class="h2">{st.title}</h2>
       <p class="lead">{st.intro}</p>
     </header>
 
     <div class="columns">
-      <div class="column" data-reveal style="--reveal-index: 0">
+      <div class="column">
         <h3 class="column__title"><span class="state state--today" aria-hidden="true"></span>{st.todayTitle}</h3>
         <ul class="features">
           {st.today.map((f) => (
@@ -29,7 +29,7 @@ const st = copy[locale].status;
           ))}
         </ul>
       </div>
-      <div class="column" data-reveal style="--reveal-index: 1">
+      <div class="column">
         <h3 class="column__title"><span class="state state--proving" aria-hidden="true"></span>{st.provingTitle}</h3>
         <ul class="features">
           {st.proving.map((f) => (
@@ -42,25 +42,33 @@ const st = copy[locale].status;
       </div>
     </div>
 
-    <div class="roadmap" data-reveal>
+    <div class="roadmap">
       <h3 class="h3">{st.nextTitle}</h3>
-      <ol class="roadmap__list">
-        <li class="milestone milestone--next">
-          <p class="milestone__tag">{st.nextLabel}</p>
-          <p class="feature__title">{st.next.title}</p>
-          <p class="feature__body">{st.next.body}</p>
-        </li>
-        {st.planned.map((m) => (
-          <li class="milestone">
-            <p class="milestone__tag">{st.plannedLabel}</p>
-            <p class="feature__title">{m.title}</p>
-            <p class="feature__body">{m.body}</p>
-          </li>
-        ))}
-      </ol>
+      <div class="columns">
+        <div class="column">
+          <h4 class="column__title"><span class="state state--today" aria-hidden="true"></span>{st.nextLabel}</h4>
+          <ul class="features">
+            <li class="feature">
+              <p class="feature__title">{st.next.title}</p>
+              <p class="feature__body">{st.next.body}</p>
+            </li>
+          </ul>
+        </div>
+        <div class="column">
+          <h4 class="column__title"><span class="state state--proving" aria-hidden="true"></span>{st.plannedLabel}</h4>
+          <ul class="features">
+            {st.planned.map((m) => (
+              <li class="feature">
+                <p class="feature__title">{m.title}</p>
+                <p class="feature__body">{m.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="limits" data-reveal>
+    <div class="limits">
       <h3 class="h3">{st.limitsTitle}</h3>
       <ul class="limits__list">
         {st.limits.map((l) => (
@@ -142,33 +150,6 @@ const st = copy[locale].status;
     margin-block-end: var(--space-stack-lg);
   }
 
-  .roadmap__list {
-    display: grid;
-    gap: var(--space-3);
-  }
-
-  .milestone {
-    display: grid;
-    align-content: start;
-    gap: var(--space-1);
-    padding: var(--space-4);
-    border: var(--border-width) solid var(--color-border);
-    border-radius: var(--radius);
-  }
-
-  .milestone--next {
-    border-color: var(--color-accent);
-  }
-
-  .milestone__tag {
-    margin-block-end: var(--space-1);
-    font-family: var(--font-sans);
-    font-size: var(--text-small);
-    font-weight: var(--weight-medium);
-    line-height: var(--leading-label);
-    color: var(--color-text-muted);
-  }
-
   .limits__list {
     display: grid;
     column-gap: var(--space-8);
@@ -179,17 +160,12 @@ const st = copy[locale].status;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .limits__list,
-    .roadmap__list {
+    .limits__list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 1280px) {
-    .roadmap__list {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
-
     .limits__list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }

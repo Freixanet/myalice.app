@@ -14,16 +14,15 @@ const s = y.specimens;
 
 <section class="section" id="why" aria-labelledby="why-title">
   <div class="container">
-    <header class="section-header" data-reveal>
+    <header class="section-header">
       <h2 id="why-title" class="h2">{y.title}</h2>
       <p class="lead">{y.intro}</p>
     </header>
 
     <ol class="why-list">
       {y.items.map((item, i) => (
-        <li class="why-item" data-reveal>
+        <li class="why-item">
           <div class="why-item__text">
-            <p class="label">{item.number}</p>
             <h3 class="h3">{item.title}</h3>
             <p class="body">{item.body}</p>
           </div>

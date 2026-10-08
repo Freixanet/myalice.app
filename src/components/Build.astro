@@ -14,7 +14,7 @@ const commands = b.code.join('\n');
 
 <section class="section" id="build" aria-labelledby="build-title">
   <div class="container build">
-    <div class="build__copy" data-reveal>
+    <div class="build__copy">
       <h2 id="build-title" class="h2">{b.title}</h2>
       <p class="lead">{b.intro}</p>
       <div class="build__ctas">
@@ -24,7 +24,7 @@ const commands = b.code.join('\n');
       <p class="small">{b.requirements} <a class="link" href={b.guideHref}>{b.guideLink}</a></p>
     </div>
 
-    <div class="terminal" data-reveal style="--reveal-index: 1">
+    <div class="terminal">
       <div class="terminal__bar">
         <span class="terminal__label">{b.codeLabel}</span>
         <button class="terminal__copy" type="button" hidden data-copy={commands} data-label-copied={b.copied}>{b.copy}</button>
