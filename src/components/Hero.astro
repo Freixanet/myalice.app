@@ -97,4 +97,16 @@ const h = copy[locale].hero;
       justify-content: flex-end;
     }
   }
+
+  /* Wide screens: the copy column takes its own width and the iPhone is centred in
+     the space left beside it, so the gap to the headline equals the gap to the edge. */
+  @media (min-width: 1280px) {
+    .hero__inner {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .hero__visual {
+      justify-content: center;
+    }
+  }
 </style>
