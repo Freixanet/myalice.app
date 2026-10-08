@@ -72,7 +72,8 @@ const caption = copy[locale].hero.caption;
 
   .device {
     width: min(var(--device-width), 100%);
-    aspect-ratio: var(--device-aspect);
+    /* Height follows the conversation, not a fixed iPhone ratio: a fixed ratio left an
+       empty band above the chat on wide screens and cut its last lines on narrow ones. */
     padding: var(--device-bezel);
     border: var(--border-width) solid var(--color-device-border);
     border-radius: var(--radius-device);
@@ -125,6 +126,7 @@ const caption = copy[locale].hero.caption;
     flex-direction: column;
     justify-content: flex-end;
     gap: var(--device-gap);
+    padding-block-start: var(--space-16);
   }
 
   .msg--user {
