@@ -71,7 +71,7 @@ const caption = copy[locale].hero.caption;
   }
 
   .device {
-    width: var(--device-width);
+    width: min(var(--device-width), 100%);
     aspect-ratio: var(--device-aspect);
     padding: var(--device-bezel);
     border: var(--border-width) solid var(--color-device-border);
@@ -85,7 +85,7 @@ const caption = copy[locale].hero.caption;
     flex-direction: column;
     height: 100%;
     padding: var(--device-screen-pad-top) var(--device-screen-pad) var(--device-screen-pad);
-    overflow: hidden;
+    overflow: clip;
     border-radius: var(--radius-device-screen);
     background: var(--color-device-screen);
     color: var(--color-text);
@@ -109,7 +109,7 @@ const caption = copy[locale].hero.caption;
     display: grid;
     justify-items: center;
     gap: var(--space-1);
-    margin-bottom: var(--device-gap);
+    margin-block-end: var(--device-gap);
     color: var(--color-text);
   }
 
@@ -192,8 +192,6 @@ const caption = copy[locale].hero.caption;
   .browser__live {
     margin-inline-start: auto;
     color: var(--color-accent);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-label);
   }
 
   .browser__page {
@@ -227,8 +225,6 @@ const caption = copy[locale].hero.caption;
   .approval__label {
     font-family: var(--font-mono);
     font-size: var(--text-device-small);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
     color: var(--color-accent);
   }
 
@@ -239,6 +235,7 @@ const caption = copy[locale].hero.caption;
   }
 
   .approval__amount {
+    font-variant-numeric: tabular-nums;
     color: var(--color-text);
     font-weight: var(--weight-medium);
   }
@@ -272,7 +269,7 @@ const caption = copy[locale].hero.caption;
   }
 
   .device__composer {
-    margin-top: var(--device-gap);
+    margin-block-start: var(--device-gap);
     padding: var(--space-2) var(--space-3);
     border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius);

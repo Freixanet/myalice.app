@@ -5,11 +5,16 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  min-width: 0;
 }
 
 html {
+  interpolate-size: allow-keywords;
+  overflow-wrap: break-word;
+  font-synthesis: none;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -28,7 +33,12 @@ body {
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+}
+
+a,
+button,
+summary {
+  touch-action: manipulation;
 }
 
 h1,
@@ -55,6 +65,7 @@ img,
 svg {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 ::selection {
@@ -72,13 +83,13 @@ svg {
 
 .section {
   padding-block: var(--space-section);
-  border-top: var(--border-width) solid var(--color-border);
+  border-block-start: var(--border-width) solid var(--color-border);
 }
 
 .section-header {
   display: grid;
   gap: var(--space-4);
-  margin-bottom: var(--space-stack-lg);
+  margin-block-end: var(--space-stack-lg);
 }
 
 /* ---------- Type roles ---------- */
@@ -136,11 +147,10 @@ svg {
 }
 
 .label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
   line-height: var(--leading-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
   color: var(--color-accent);
 }
 
@@ -171,8 +181,14 @@ a {
   transition: color var(--duration-fast) var(--ease-out);
 }
 
-.link:hover {
+.link:active {
   color: var(--color-accent-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: var(--color-accent-strong);
+  }
 }
 
 /* ---------- Buttons ---------- */
@@ -195,8 +211,17 @@ a {
   transition:
     background-color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
+    color var(--duration-fast) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
 }
 
 .btn:active {
@@ -208,8 +233,10 @@ a {
   color: var(--color-button-primary-text);
 }
 
-.btn--primary:hover {
-  background: var(--color-button-primary-bg-hover);
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover {
+    background: var(--color-button-primary-bg-hover);
+  }
 }
 
 .btn--secondary {
@@ -218,8 +245,10 @@ a {
   color: var(--color-text);
 }
 
-.btn--secondary:hover {
-  background: var(--color-surface-sunken);
+@media (hover: hover) and (pointer: fine) {
+  .btn--secondary:hover {
+    background: var(--color-surface-sunken);
+  }
 }
 
 .btn--small {

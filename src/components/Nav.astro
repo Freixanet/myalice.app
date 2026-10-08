@@ -4,8 +4,11 @@ import { GITHUB_URL } from '../site';
 
 interface Props {
   locale: Locale;
+  /** On a page other than home: section links point back to home, and the language link to this page's translation. */
+  altHref?: string;
 }
-const { locale } = Astro.props;
+const { locale, altHref } = Astro.props;
+const sectionBase = altHref ? paths[locale] : '';
 const t = copy[locale].nav;
 ---
 
@@ -18,7 +21,7 @@ const t = copy[locale].nav;
     <nav class="nav__sections" aria-label={t.ariaLabel}>
       <ul class="nav__links">
         {t.links.map((link) => (
-          <li><a class="nav__link" href={link.href}>{link.label}</a></li>
+          <li><a class="nav__link" href={sectionBase + link.href}>{link.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -26,7 +29,7 @@ const t = copy[locale].nav;
     <div class="nav__actions">
       <a
         class="nav__link nav__lang"
-        href={t.langSwitch.href}
+        href={altHref ?? t.langSwitch.href}
         hreflang={t.langSwitch.hreflang}
         lang={t.langSwitch.hreflang}
         aria-label={t.langSwitch.ariaLabel}
@@ -38,7 +41,7 @@ const t = copy[locale].nav;
 
 <style>
   .nav {
-    border-bottom: var(--border-width) solid var(--color-border);
+    border-block-end: var(--border-width) solid var(--color-border);
   }
 
   .nav__inner {
@@ -82,7 +85,13 @@ const t = copy[locale].nav;
     transition: color var(--duration-fast) var(--ease-out);
   }
 
-  .nav__link:hover {
+  @media (hover: hover) and (pointer: fine) {
+    .nav__link:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .nav__link:active {
     color: var(--color-text);
   }
 
@@ -96,7 +105,6 @@ const t = copy[locale].nav;
   .nav__lang {
     font-family: var(--font-mono);
     font-size: var(--text-label);
-    letter-spacing: var(--tracking-label);
     min-width: var(--size-touch);
     justify-content: center;
   }

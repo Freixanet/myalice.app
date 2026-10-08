@@ -1,14 +1,17 @@
 // Automated acceptance checks for myalice.app. Run against `npm run preview`.
 //   BASE=http://127.0.0.1:4321 node scripts/qa.mjs [--shots]
-// Uses the system Chrome (channel "chrome"); no browser download needed.
+// Runs in the system Chrome plus Playwright's WebKit (Safari) and Firefox.
+// ENGINES=chrome limits the run; screenshots are taken in Chrome only.
 // Exit code 1 if any check fails.
-import { chromium } from 'playwright';
+import { chromium, webkit, firefox } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import { mkdirSync } from 'node:fs';
 
 const BASE = process.env.BASE ?? 'http://127.0.0.1:4321';
 const SHOTS = process.argv.includes('--shots');
-const PAGES = ['/', '/es/'];
+const PAGES = ['/', '/es/', '/privacy/', '/es/privacidad/'];
+const ENGINES = (process.env.ENGINES ?? 'chrome,webkit,firefox').split(',');
+const launchers = { chrome: () => chromium.launch({ channel: 'chrome' }), webkit: () => webkit.launch(), firefox: () => firefox.launch() };
 const VIEWPORTS = [
   [375, 812],
   [768, 1024],
@@ -23,12 +26,15 @@ const fail = (msg) => { failures.push(msg); console.log('  FAIL', msg); };
 const pass = (msg) => console.log('  ok  ', msg);
 
 if (SHOTS) mkdirSync('qa/screenshots', { recursive: true });
-const browser = await chromium.launch({ channel: 'chrome' });
+for (const engine of ENGINES) {
+const browser = await launchers[engine]();
+const shots = SHOTS && engine === 'chrome';
+const name = (path) => ({ '/': 'en', '/es/': 'es', '/privacy/': 'privacy-en', '/es/privacidad/': 'privacy-es' })[path];
 
 for (const path of PAGES) {
   for (const [width, height] of VIEWPORTS) {
     for (const colorScheme of SCHEMES) {
-      const tag = `${path === '/' ? 'en' : 'es'}-${width}-${colorScheme}`;
+      const tag = `${engine}-${name(path)}-${width}-${colorScheme}`;
       console.log(tag);
       const context = await browser.newContext({ viewport: { width, height }, colorScheme, reducedMotion: 'no-preference' });
       const page = await context.newPage();
@@ -66,14 +72,14 @@ for (const path of PAGES) {
         ? pass('axe: 0 violations')
         : axe.violations.forEach((v) => fail(`${tag}: axe ${v.id} (${v.nodes.length}) ${v.nodes[0]?.target?.join(' ')}`));
 
-      if (SHOTS) await page.screenshot({ path: `qa/screenshots/${tag}.png`, fullPage: true });
+      if (shots) await page.screenshot({ path: `qa/screenshots/${tag.replace(`${engine}-`, '')}.png`, fullPage: true });
       await context.close();
     }
   }
 
   // Without JavaScript the page must read completely: nothing hidden.
   {
-    const tag = `${path === '/' ? 'en' : 'es'}-nojs`;
+    const tag = `${engine}-${name(path)}-nojs`;
     console.log(tag);
     const context = await browser.newContext({ viewport: { width: 375, height: 812 }, javaScriptEnabled: false });
     const page = await context.newPage();
@@ -90,7 +96,7 @@ for (const path of PAGES) {
 
   // Reduced motion: final state immediately, no wipe, no rise.
   {
-    const tag = `${path === '/' ? 'en' : 'es'}-reduced-motion`;
+    const tag = `${engine}-${name(path)}-reduced-motion`;
     console.log(tag);
     const context = await browser.newContext({ viewport: { width: 375, height: 812 }, reducedMotion: 'reduce' });
     const page = await context.newPage();
@@ -103,8 +109,22 @@ for (const path of PAGES) {
     moving.length === 0 ? pass('reduced motion: everything static and visible') : fail(`${tag}: animated or hidden: ${moving.slice(0, 5).join(', ')}`);
     await context.close();
   }
+
+  // Reflow: nothing scrolls sideways at 320 px, or with text at 200 % on 375 px (WCAG 1.4.4, 1.4.10).
+  for (const [width, zoom] of [[320, 100], [375, 200]]) {
+    const tag = `${engine}-${name(path)}-${width}-text${zoom}`;
+    console.log(tag);
+    const context = await browser.newContext({ viewport: { width, height: 800 } });
+    const page = await context.newPage();
+    await page.goto(BASE + path, { waitUntil: 'load' });
+    if (zoom !== 100) await page.addStyleTag({ content: `html { font-size: ${zoom}%; }` });
+    const extra = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    extra <= 0 ? pass('no sideways scroll') : fail(`${tag}: page scrolls sideways by ${extra}px`);
+    await context.close();
+  }
 }
 
 await browser.close();
+}
 console.log(failures.length ? `\n${failures.length} check(s) failed` : '\nAll checks passed');
 process.exit(failures.length ? 1 : 0);

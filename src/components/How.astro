@@ -68,7 +68,7 @@ const d = h.diagram;
 
 <style>
   .diagram {
-    margin-bottom: var(--space-stack-lg);
+    margin-block-end: var(--space-stack-lg);
   }
 
   .diagram__flow {
@@ -119,23 +119,21 @@ const d = h.diagram;
   .connector__label {
     font-family: var(--font-mono);
     font-size: var(--text-label);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
     color: var(--color-text-subtle);
   }
 
   .steps {
     display: grid;
     gap: var(--space-10);
-    margin-bottom: var(--space-stack-lg);
+    margin-block-end: var(--space-stack-lg);
   }
 
   .step {
     display: grid;
     align-content: start;
     gap: var(--space-3);
-    padding-top: var(--space-6);
-    border-top: var(--border-width) solid var(--color-border);
+    padding-block-start: var(--space-6);
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   .step__code {
@@ -153,8 +151,8 @@ const d = h.diagram;
     display: grid;
     gap: var(--space-3);
     max-width: var(--measure);
-    padding-top: var(--space-6);
-    border-top: var(--border-width) solid var(--color-border);
+    padding-block-start: var(--space-6);
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   @media (min-width: 1280px) {

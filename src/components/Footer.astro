@@ -1,10 +1,13 @@
 ---
-import { copy, paths, type Locale } from '../i18n';
+import { copy, paths, privacyPaths, type Locale } from '../i18n';
+import { CONTACT_EMAIL } from '../site';
 
 interface Props {
   locale: Locale;
+  /** On a page other than home: the language link goes to this page's translation. */
+  altHref?: string;
 }
-const { locale } = Astro.props;
+const { locale, altHref } = Astro.props;
 const f = copy[locale].footer;
 ---
 
@@ -14,6 +17,7 @@ const f = copy[locale].footer;
       <a class="footer__home" href={paths[locale]} aria-label={copy[locale].nav.homeLabel}>
         <span class="footer__wordmark" aria-hidden="true">Alice</span>
       </a>
+      <p class="footer__contact">{f.contactLabel}: <a class="link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
       <p class="small">{f.independent}</p>
       <p class="small">{f.credit}</p>
       <p class="small"><a class="link" href="https://github.com/Freixanet/alice/blob/main/LICENSE">{f.license}</a> © Marc Freixanet</p>
@@ -22,7 +26,8 @@ const f = copy[locale].footer;
       {f.links.map((l) => (
         <li><a class="footer__link" href={l.href} hreflang={'hreflang' in l ? l.hreflang : undefined}>{l.label}</a></li>
       ))}
-      <li><a class="footer__link" href={f.langSwitch.href} hreflang={f.langSwitch.hreflang} lang={f.langSwitch.hreflang}>{f.langSwitch.label}</a></li>
+      <li><a class="footer__link" href={privacyPaths[locale]}>{f.privacy}</a></li>
+      <li><a class="footer__link" href={altHref ?? f.langSwitch.href} hreflang={f.langSwitch.hreflang} lang={f.langSwitch.hreflang}>{f.langSwitch.label}</a></li>
     </ul>
   </div>
 </footer>
@@ -30,7 +35,7 @@ const f = copy[locale].footer;
 <style>
   .footer {
     padding-block: var(--space-12);
-    border-top: var(--border-width) solid var(--color-border);
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   .footer__inner {
@@ -49,9 +54,14 @@ const f = copy[locale].footer;
     gap: var(--space-2);
     justify-self: start;
     min-height: var(--size-touch);
-    margin-bottom: var(--space-2);
+    margin-block-end: var(--space-2);
     color: var(--color-text);
     text-decoration: none;
+  }
+
+  .footer__contact {
+    margin-block-end: var(--space-2);
+    color: var(--color-text);
   }
 
   .footer__wordmark {
@@ -77,8 +87,14 @@ const f = copy[locale].footer;
     transition: color var(--duration-fast) var(--ease-out);
   }
 
-  .footer__link:hover {
+  .footer__link:active {
     color: var(--color-text);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .footer__link:hover {
+      color: var(--color-text);
+    }
   }
 
   @media (min-width: 768px) {

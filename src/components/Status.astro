@@ -78,21 +78,19 @@ const st = copy[locale].status;
   .columns {
     display: grid;
     gap: var(--space-12);
-    margin-bottom: var(--space-stack-lg);
+    margin-block-end: var(--space-stack-lg);
   }
 
   .column__title {
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    padding-bottom: var(--space-4);
-    border-bottom: var(--border-width) solid var(--color-border);
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    font-weight: var(--weight-regular);
+    padding-block-end: var(--space-4);
+    border-block-end: var(--border-width) solid var(--color-border);
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
     line-height: var(--leading-label);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
     color: var(--color-text-muted);
   }
 
@@ -120,7 +118,7 @@ const st = copy[locale].status;
     display: grid;
     gap: var(--space-1);
     padding-block: var(--space-4);
-    border-bottom: var(--border-width) solid var(--color-border);
+    border-block-end: var(--border-width) solid var(--color-border);
   }
 
   .feature__title {
@@ -141,7 +139,7 @@ const st = copy[locale].status;
   }
 
   .roadmap {
-    margin-bottom: var(--space-stack-lg);
+    margin-block-end: var(--space-stack-lg);
   }
 
   .roadmap__list {
@@ -160,16 +158,14 @@ const st = copy[locale].status;
 
   .milestone--next {
     border-color: var(--color-accent);
-    background: var(--color-accent-soft);
   }
 
   .milestone__tag {
-    margin-bottom: var(--space-1);
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
+    margin-block-end: var(--space-1);
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
     line-height: var(--leading-label);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
     color: var(--color-text-muted);
   }
 

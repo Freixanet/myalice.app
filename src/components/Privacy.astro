@@ -1,0 +1,65 @@
+---
+// Privacy policy. Facts only: the site sets no cookies and loads nothing from
+// third parties. The video and waitlist paragraphs appear only once those
+// sections are live, so the policy always describes what the site really does.
+import { copy, type Locale } from '../i18n';
+import { CONTACT_EMAIL, DEMO_VIDEO_ID, WAITLIST_ENABLED, WAITLIST_PROVIDER, isFilled } from '../site';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const p = copy[locale].privacy;
+const active: Record<string, boolean> = {
+  video: isFilled(DEMO_VIDEO_ID),
+  waitlist: WAITLIST_ENABLED && isFilled(WAITLIST_PROVIDER),
+};
+const sections = p.sections.filter((s) => active[s.id] ?? true);
+// Split a body around {email} so the address renders as a mailto link.
+const parts = (body: string) => body.replace('{provider}', WAITLIST_PROVIDER).split('{email}');
+---
+
+<section class="privacy" aria-labelledby="privacy-title">
+  <div class="container privacy__inner">
+    <header class="privacy__header">
+      <h1 id="privacy-title" class="h2">{p.title}</h1>
+      <p class="lead">{p.intro}</p>
+      <p class="small">{p.updated}</p>
+    </header>
+    {sections.map((s) => (
+      <section class="privacy__item" aria-labelledby={`privacy-${s.id}`}>
+        <h2 id={`privacy-${s.id}`} class="h3">{s.title}</h2>
+        <p class="body">
+          {parts(s.body).map((chunk, i) => (
+            <>{i > 0 && <a class="link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>}{chunk}</>
+          ))}
+        </p>
+        {'link' in s && s.link && <p class="small"><a class="link" href={s.link.href}>{s.link.label}</a></p>}
+      </section>
+    ))}
+  </div>
+</section>
+
+<style>
+  .privacy {
+    padding-block: var(--space-16) var(--space-section);
+  }
+
+  .privacy__inner {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .privacy__header,
+  .privacy__item {
+    display: grid;
+    gap: var(--space-4);
+    max-inline-size: var(--measure);
+  }
+
+  .privacy__item {
+    gap: var(--space-3);
+    padding-block-start: var(--space-8);
+    border-block-start: var(--border-width) solid var(--color-border);
+  }
+</style>

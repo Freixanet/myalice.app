@@ -40,11 +40,11 @@ const f = copy[locale].faq;
 
   .faq__list {
     max-width: var(--measure-faq);
-    border-top: var(--border-width) solid var(--color-border);
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   .faq__item {
-    border-bottom: var(--border-width) solid var(--color-border);
+    border-block-end: var(--border-width) solid var(--color-border);
   }
 
   .faq__q {
@@ -66,8 +66,10 @@ const f = copy[locale].faq;
     display: none;
   }
 
-  .faq__q:hover {
-    color: var(--color-accent-strong);
+  @media (hover: hover) and (pointer: fine) {
+    .faq__q:hover {
+      color: var(--color-accent-strong);
+    }
   }
 
   .faq__icon {
@@ -75,7 +77,31 @@ const f = copy[locale].faq;
     width: var(--size-icon-sm);
     height: var(--size-icon-sm);
     color: var(--color-accent);
-    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .faq__q:active {
+    color: var(--color-accent-strong);
+  }
+
+  .faq__item::details-content {
+    block-size: 0;
+    overflow: clip;
+  }
+
+  .faq__item[open]::details-content {
+    block-size: auto;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .faq__icon {
+      transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    .faq__item::details-content {
+      transition:
+        block-size var(--duration-base) var(--ease-out),
+        content-visibility var(--duration-base) allow-discrete;
+    }
   }
 
   .faq__item[open] .faq__icon {
@@ -84,7 +110,7 @@ const f = copy[locale].faq;
 
   .faq__a {
     max-width: var(--measure);
-    padding-bottom: var(--space-6);
+    padding-block-end: var(--space-6);
     color: var(--color-text-muted);
     font-size: var(--text-body);
     line-height: var(--leading-body);

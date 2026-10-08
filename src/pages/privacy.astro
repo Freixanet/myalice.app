@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Privacy from '../components/Privacy.astro';
+import Footer from '../components/Footer.astro';
+import { copy, privacyPaths } from '../i18n';
+
+const p = copy.en.privacy;
+const other = privacyPaths.es;
+---
+
+<Base locale="en" title={p.metaTitle} description={p.metaDescription} localePaths={privacyPaths}>
+  <Nav locale="en" altHref={other} />
+  <main id="main">
+    <Privacy locale="en" />
+  </main>
+  <Footer locale="en" altHref={other} />
+</Base>

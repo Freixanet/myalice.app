@@ -92,7 +92,7 @@ const s = y.specimens;
     display: grid;
     gap: var(--space-8);
     padding-block: var(--space-10);
-    border-top: var(--border-width) solid var(--color-border);
+    border-block-start: var(--border-width) solid var(--color-border);
   }
 
   .why-item__text {
@@ -146,8 +146,6 @@ const s = y.specimens;
   .spec-browser__live {
     margin-inline-start: auto;
     color: var(--color-accent);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
   }
 
   .spec-browser__page {
@@ -202,8 +200,6 @@ const s = y.specimens;
   .spec-sheet__label {
     font-family: var(--font-mono);
     font-size: var(--text-label);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
     color: var(--color-text-subtle);
   }
 
@@ -246,6 +242,7 @@ const s = y.specimens;
   }
 
   .spec-pay__amount {
+    font-variant-numeric: tabular-nums;
     color: var(--color-text);
     font-weight: var(--weight-medium);
   }
@@ -280,8 +277,6 @@ const s = y.specimens;
   .spec-keys__name {
     font-family: var(--font-mono);
     font-size: var(--text-label);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
     color: var(--color-accent);
   }
 

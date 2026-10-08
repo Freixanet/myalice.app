@@ -69,7 +69,7 @@ const watchUrl = `https://www.youtube.com/watch?v=${DEMO_VIDEO_ID}`;
     position: relative;
     max-width: var(--measure-faq);
     aspect-ratio: 16 / 9;
-    overflow: hidden;
+    overflow: clip;
     border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius);
     background: var(--color-panel-dark-bg);
@@ -108,7 +108,12 @@ const watchUrl = `https://www.youtube.com/watch?v=${DEMO_VIDEO_ID}`;
     border: var(--border-width) solid var(--color-panel-dark-muted);
     border-radius: var(--radius-full);
     background: var(--color-panel-dark-bg);
-    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .video__play {
+      transition: transform var(--duration-fast) var(--ease-out);
+    }
   }
 
   .video__play svg {

@@ -9,11 +9,18 @@ import {
 
 interface Props {
   locale: Locale;
+  /** Pages other than home pass their own title, description and per-locale paths. */
+  title?: string;
+  description?: string;
+  localePaths?: Record<Locale, string>;
 }
 
-const { locale } = Astro.props;
+const { locale, title, description, localePaths = paths } = Astro.props;
+const isHome = localePaths === paths;
 const t = copy[locale];
-const canonical = new URL(paths[locale], SITE_URL).href;
+const pageTitle = title ?? t.meta.title;
+const pageDescription = description ?? t.meta.description;
+const canonical = new URL(localePaths[locale], SITE_URL).href;
 const ogImage = new URL(t.meta.ogImage, SITE_URL).href;
 
 const jsonLd = {
@@ -42,12 +49,12 @@ const jsonLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>document.documentElement.classList.add('js');</script>
-    <title>{t.meta.title}</title>
-    <meta name="description" content={t.meta.description} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={new URL(paths.en, SITE_URL).href} />
-    <link rel="alternate" hreflang="es" href={new URL(paths.es, SITE_URL).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL(paths.en, SITE_URL).href} />
+    <link rel="alternate" hreflang="en" href={new URL(localePaths.en, SITE_URL).href} />
+    <link rel="alternate" hreflang="es" href={new URL(localePaths.es, SITE_URL).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(localePaths.en, SITE_URL).href} />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content={THEME_COLOR_LIGHT} />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content={THEME_COLOR_DARK} />
@@ -60,8 +67,8 @@ const jsonLd = {
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alice" />
-    <meta property="og:title" content={t.meta.title} />
-    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={t.locale} />
     <meta property="og:locale:alternate" content={locale === 'en' ? copy.es.locale : copy.en.locale} />
@@ -70,12 +77,12 @@ const jsonLd = {
     <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
     <meta property="og:image:alt" content={t.meta.ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={t.meta.title} />
-    <meta name="twitter:description" content={t.meta.description} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={t.meta.ogImageAlt} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
     <a class="skip-link" href="#main">{t.skipLink}</a>
