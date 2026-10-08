@@ -71,7 +71,7 @@ const caption = copy[locale].hero.caption;
   }
 
   .device {
-    width: min(var(--device-width), 100%);
+    width: min(max(var(--device-width), var(--specimen-max)), 100%);
     /* Height follows the conversation, not a fixed iPhone ratio: a fixed ratio left an
        empty band above the chat on wide screens and cut its last lines on narrow ones. */
     padding: var(--device-bezel);
@@ -126,7 +126,13 @@ const caption = copy[locale].hero.caption;
     flex-direction: column;
     justify-content: flex-end;
     gap: var(--device-gap);
-    padding-block-start: var(--space-16);
+    padding-block-start: var(--space-2);
+  }
+
+  @media (min-width: 1280px) {
+    .device__thread {
+      padding-block-start: var(--space-16);
+    }
   }
 
   .msg--user {
